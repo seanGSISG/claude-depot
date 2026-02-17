@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-depot",
+  "description": "A curated depot of Claude Code plugins — skills, tools, and extensions",
+  "owner": {
+    "name": "seanGSISG",
+    "url": "https://github.com/seanGSISG"
+  },
+  "plugins": [
+    {
+      "name": "skill-creator",
+      "source": "./plugins/skill-creator",
+      "description": "Guide for creating effective Claude Code skills with templates, validators, and packaging tools",
+      "category": "development",
+      "tags": ["skills", "templates", "development", "creator", "packaging"]
+    }
+  ]
+}
