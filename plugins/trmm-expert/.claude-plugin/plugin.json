@@ -1,0 +1,13 @@
+{
+  "name": "trmm-expert",
+  "description": "Tactical RMM documentation expert skill for answering questions about the TRMM remote monitoring and management platform",
+  "version": "1.0.0",
+  "author": {
+    "name": "seanGSISG",
+    "url": "https://github.com/seanGSISG"
+  },
+  "homepage": "https://github.com/seanGSISG/claude-depot",
+  "repository": "https://github.com/seanGSISG/claude-depot",
+  "license": "MIT",
+  "keywords": ["claude-code", "trmm", "tactical-rmm", "rmm", "documentation", "sysadmin"]
+}
