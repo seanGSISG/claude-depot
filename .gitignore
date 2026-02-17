@@ -1,5 +1,6 @@
-__pycache__/
+**/__pycache__/
 *.pyc
 *.pyo
 *.skill
 .DS_Store
+dist/

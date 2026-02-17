@@ -8,6 +8,13 @@
   },
   "plugins": [
     {
+      "name": "trmm-expert",
+      "source": "./plugins/trmm-expert",
+      "description": "Tactical RMM documentation expert skill for answering questions about the TRMM remote monitoring and management platform",
+      "category": "documentation",
+      "tags": ["trmm", "tactical-rmm", "rmm", "sysadmin", "documentation"]
+    },
+    {
       "name": "skill-creator-enhanced",
       "source": "./plugins/skill-creator-enhanced",
       "description": "Guide for creating effective Claude Code skills with templates, validators, and packaging tools",
