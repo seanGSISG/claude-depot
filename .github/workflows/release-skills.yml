@@ -1,0 +1,83 @@
+name: Build and Release Skills
+
+on:
+  push:
+    tags:
+      - 'v*'           # e.g. v1.0.0 — builds all skills
+      - '*-v*'         # e.g. trmm-expert-v1.0.0 — builds only that skill
+
+permissions:
+  contents: write
+
+jobs:
+  build-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Determine which skills to build
+        id: scope
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if [[ "$TAG" == v* ]]; then
+            echo "mode=all" >> "$GITHUB_OUTPUT"
+          else
+            SKILL_NAME="${TAG%-v*}"
+            echo "mode=single" >> "$GITHUB_OUTPUT"
+            echo "skill_name=${SKILL_NAME}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build .skill files
+        run: |
+          mkdir -p dist
+          VALIDATE="plugins/skill-creator-enhanced/scripts/quick_validate.py"
+          TAG="${GITHUB_REF_NAME}"
+          MODE="${{ steps.scope.outputs.mode }}"
+          SKILL_NAME="${{ steps.scope.outputs.skill_name }}"
+          BUILT=0
+
+          for skill_dir in plugins/*/skills/*/; do
+            name=$(basename "$skill_dir")
+
+            # Skip if single-skill mode and this isn't the target
+            if [[ "$MODE" == "single" && "$name" != "$SKILL_NAME" ]]; then
+              continue
+            fi
+
+            if [ ! -f "$skill_dir/SKILL.md" ]; then
+              echo "::warning::Skipping $name — no SKILL.md"
+              continue
+            fi
+
+            echo "--- Validating $name ---"
+            if ! python "$VALIDATE" "$skill_dir"; then
+              echo "::error::Validation failed for $name"
+              exit 1
+            fi
+
+            echo "--- Packaging $name ---"
+            parent_dir=$(dirname "$skill_dir")
+            (cd "$parent_dir" && zip -r "$GITHUB_WORKSPACE/dist/${name}.skill" "$name" -x '*/__pycache__/*' '*.pyc')
+            BUILT=$((BUILT + 1))
+            echo "Built: dist/${name}.skill"
+          done
+
+          if [[ "$BUILT" -eq 0 ]]; then
+            echo "::error::No skills were built"
+            exit 1
+          fi
+          echo "Built $BUILT skill(s)"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.skill
+          generate_release_notes: true
+          fail_on_unmatched_files: true
