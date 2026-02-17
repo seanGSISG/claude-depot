@@ -47,35 +47,76 @@ python package_skill.py /path/to/skills/<name> /output/dir
 
 `.skill` files are ZIP archives containing `<skill-name>/SKILL.md` + `<skill-name>/references/*`. They work in Claude.ai, Claude Desktop, and Claude Code.
 
+## Versioning
+
+There are two distribution channels, each keyed off a different version source:
+
+| Channel | Version Source | Who Consumes It |
+|---|---|---|
+| **Plugin marketplace** (`/plugin install`) | `version` in `plugins/<name>/.claude-plugin/plugin.json` | Claude Code users |
+| **GitHub Releases** (`.skill` downloads) | Git tag (e.g., `trmm-expert-v1.1.0`) | Claude.ai / Claude Desktop users |
+
+**These must stay in sync.** If you change plugin code but don't bump `plugin.json` version, marketplace users won't see the update (Claude Code caches by version string). If you bump `plugin.json` but forget the tag, `.skill` downloads won't be built.
+
+### Releasing a Plugin Update
+
+Use the bump script to update `plugin.json` and create the tag atomically:
+
+```bash
+# Bump version, commit, and create tag in one step
+./scripts/bump-version.sh trmm-expert 1.1.0
+
+# Review, then push both commit and tag
+git push && git push origin trmm-expert-v1.1.0
+```
+
+The CI workflow will:
+1. Verify the tag version matches `plugin.json` (fails the build if mismatched)
+2. Validate the skill with `quick_validate.py`
+3. Package and attach the `.skill` file to a GitHub Release
+
+### Version Rules
+
+- Use semver: `MAJOR.MINOR.PATCH` (e.g., `1.2.0`)
+- Bump PATCH for reference content updates and fixes
+- Bump MINOR for new reference files, SKILL.md routing changes, or new features
+- Bump MAJOR for breaking changes (restructured references, renamed files)
+- Never reuse a version number — Claude Code caches by exact version string
+
+### Tag Patterns
+
+| Pattern | Example | Behavior |
+|---|---|---|
+| `<plugin>-v<semver>` | `trmm-expert-v1.1.0` | Builds only that plugin's skill, verifies version match |
+| `v<semver>` | `v2.0.0` | Builds all skills (use for coordinated multi-plugin releases) |
+
+### What Happens When You Forget
+
+- **Changed code, didn't bump version:** Marketplace users stay on the old cached version. Fix: bump version and re-release.
+- **Bumped plugin.json, didn't tag:** No `.skill` file built. Marketplace users get the update, but Claude.ai/Desktop users don't. Fix: create the tag.
+- **Tag version doesn't match plugin.json:** CI fails the build and tells you what to fix.
+
 ## Release Workflow
 
 The GitHub Actions workflow at `.github/workflows/release-skills.yml` automates building and releasing `.skill` files.
 
-**Trigger patterns:**
-- Tag `v*` (e.g., `v1.2.0`) — builds **all** skills, creates a release
-- Tag `<skill-name>-v*` (e.g., `trmm-expert-v2.0.0`) — builds **only** that skill
-
-**What it does:**
-1. Discovers all skills under `plugins/*/skills/*/`
-2. Runs `quick_validate.py` on each — fails the build if any skill is invalid
-3. Packages each into a `.skill` ZIP with correct directory structure
-4. Attaches `.skill` files to a GitHub Release with auto-generated notes
-
-**To release:**
-```bash
-git tag -a v1.1.0 -m "Description of changes"
-git push origin v1.1.0
-```
+**Steps:**
+1. Verifies tag version matches `plugin.json` version (for single-plugin tags)
+2. Discovers all skills under `plugins/*/skills/*/`
+3. Runs `quick_validate.py` on each — fails the build if any skill is invalid
+4. Packages each into a `.skill` ZIP with correct directory structure
+5. Attaches `.skill` files to a GitHub Release with auto-generated notes
 
 ## Commits
 
-Use conventional commit format: `feat:`, `fix:`, `docs:`, `chore:`. Descriptive messages explaining "why", not "what".
+Use conventional commit format: `feat:`, `fix:`, `docs:`, `chore:`. Descriptive messages explaining "why", not "what". Version bumps use `chore(<plugin>): bump version to X.Y.Z`.
 
 ## Key Files
 
 | File | Purpose |
 |---|---|
 | `.claude-plugin/marketplace.json` | Plugin registry — must be updated when adding/removing plugins |
-| `.gitignore` | Excludes `*.skill`, `__pycache__/`, `*.pyc`, `*.pyo`, `.DS_Store` |
+| `.gitignore` | Excludes `*.skill`, `__pycache__/`, `*.pyc`, `*.pyo`, `.DS_Store`, `dist/` |
+| `scripts/bump-version.sh` | Version bump helper — updates plugin.json, commits, and creates git tag |
 | `plugins/skill-creator-enhanced/scripts/quick_validate.py` | Skill validator — checks frontmatter, name format, description length |
 | `plugins/skill-creator-enhanced/scripts/package_skill.py` | Skill packager — creates `.skill` ZIP archives |

@@ -34,6 +34,33 @@ jobs:
             echo "skill_name=${SKILL_NAME}" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Verify tag-to-plugin.json version consistency
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          MODE="${{ steps.scope.outputs.mode }}"
+          SKILL_NAME="${{ steps.scope.outputs.skill_name }}"
+          ERRORS=0
+
+          if [[ "$MODE" == "single" ]]; then
+            # Single plugin tag: trmm-expert-v1.2.0 → version 1.2.0
+            TAG_VERSION="${TAG##*-v}"
+            PLUGIN_JSON="plugins/${SKILL_NAME}/.claude-plugin/plugin.json"
+            if [ -f "$PLUGIN_JSON" ]; then
+              JSON_VERSION=$(python -c "import json; print(json.load(open('$PLUGIN_JSON'))['version'])")
+              if [[ "$TAG_VERSION" != "$JSON_VERSION" ]]; then
+                echo "::error::Tag version ($TAG_VERSION) does not match $PLUGIN_JSON version ($JSON_VERSION)"
+                echo "  Run: ./scripts/bump-version.sh $SKILL_NAME $TAG_VERSION"
+                ERRORS=1
+              else
+                echo "Version match: $SKILL_NAME $JSON_VERSION"
+              fi
+            fi
+          fi
+
+          if [[ "$ERRORS" -ne 0 ]]; then
+            exit 1
+          fi
+
       - name: Build .skill files
         run: |
           mkdir -p dist
