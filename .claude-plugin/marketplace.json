@@ -8,8 +8,8 @@
   },
   "plugins": [
     {
-      "name": "skill-creator",
-      "source": "./plugins/skill-creator",
+      "name": "skill-creator-enhanced",
+      "source": "./plugins/skill-creator-enhanced",
       "description": "Guide for creating effective Claude Code skills with templates, validators, and packaging tools",
       "category": "development",
       "tags": ["skills", "templates", "development", "creator", "packaging"]

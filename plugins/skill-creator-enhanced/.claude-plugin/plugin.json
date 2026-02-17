@@ -1,5 +1,5 @@
 {
-  "name": "skill-creator",
+  "name": "skill-creator-enhanced",
   "description": "Guide for creating effective Claude Code skills with templates, validators, and packaging tools",
   "version": "1.0.0",
   "author": {
@@ -9,5 +9,5 @@
   "homepage": "https://github.com/seanGSISG/claude-depot",
   "repository": "https://github.com/seanGSISG/claude-depot",
   "license": "MIT",
-  "keywords": ["claude-code", "skills", "plugin", "skill-creator", "templates"]
+  "keywords": ["claude-code", "skills", "plugin", "skill-creator-enhanced", "templates"]
 }

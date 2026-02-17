@@ -13,12 +13,12 @@ Add the marketplace to Claude Code:
 Then install any plugin:
 
 ```
-/plugin install skill-creator@claude-depot
+/plugin install skill-creator-enhanced@claude-depot
 ```
 
 ## Available Plugins
 
-### skill-creator
+### skill-creator-enhanced
 Guide for creating effective Claude Code skills with templates, validators, and packaging tools.
 
 **What it provides:**
