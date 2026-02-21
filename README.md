@@ -43,6 +43,27 @@ Tactical RMM documentation expert — answers questions about architecture, agen
 - Reporting and SSO (Enterprise Edition)
 - Third-party integrations (Bitdefender, Zammad), SNMP, troubleshooting
 
+### claude-docs
+
+AI-powered search and access to 573 Anthropic documentation paths — Claude Code CLI, API, Agent SDK, prompt library, and more.
+
+**What it provides:**
+- Full-text content search and fuzzy path search across 571 locally mirrored documentation files
+- Automatic sync via SessionStart hook (clones/pulls from seanGSISG/claude-code-docs)
+- Category-aware results with product context (Claude Code CLI, Claude API, Agent SDK, etc.)
+- Graceful degradation — works with or without Python 3.9+
+
+**Triggers when you ask about:**
+- Claude Code CLI features (hooks, skills, MCP, memory, plugins, settings)
+- Claude API (messages, batches, files, models, admin, multi-language SDKs)
+- Agent SDK (Python/TypeScript, sessions, subagents, custom tools)
+- Prompt engineering, tool use, streaming, extended thinking, vision
+- Any Anthropic platform documentation
+
+```
+/plugin install claude-docs@claude-depot
+```
+
 ### skill-creator-enhanced
 
 Guide for creating effective Claude Code skills with templates, validators, and packaging tools.
