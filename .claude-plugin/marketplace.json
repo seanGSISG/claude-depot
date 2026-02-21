@@ -20,6 +20,13 @@
       "description": "Guide for creating effective Claude Code skills with templates, validators, and packaging tools",
       "category": "development",
       "tags": ["skills", "templates", "development", "creator", "packaging"]
+    },
+    {
+      "name": "claude-docs",
+      "source": "./plugins/claude-docs",
+      "description": "AI-powered search and access to 573 Anthropic documentation paths — Claude Code CLI, API, Agent SDK, and more",
+      "category": "documentation",
+      "tags": ["docs", "documentation", "search", "claude-code", "api", "agent-sdk"]
     }
   ]
 }

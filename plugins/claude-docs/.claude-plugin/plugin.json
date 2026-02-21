@@ -1,0 +1,13 @@
+{
+  "name": "claude-docs",
+  "description": "AI-powered search and access to 573 Anthropic documentation paths — Claude Code CLI, API, Agent SDK, and more",
+  "version": "1.0.0",
+  "author": {
+    "name": "seanGSISG",
+    "url": "https://github.com/seanGSISG"
+  },
+  "homepage": "https://github.com/seanGSISG/claude-depot",
+  "repository": "https://github.com/seanGSISG/claude-depot",
+  "license": "MIT",
+  "keywords": ["claude-code", "documentation", "search", "docs", "api", "agent-sdk"]
+}
