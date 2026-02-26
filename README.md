@@ -79,6 +79,46 @@ Guide for creating effective Claude Code skills with templates, validators, and 
 - Want to update or improve an existing skill
 - Need help structuring a skill's resources
 
+### rules-auditor
+
+Audit Claude Code rules and CLAUDE.md files for staleness, quality, and drift against the actual codebase.
+
+**What it provides:**
+- Expert knowledge on rules quality, anti-patterns, and progressive disclosure best practices
+- Automated discovery and audit of all `.claude/rules/*.md` and `CLAUDE.md` files
+- Staleness detection: dead globs, broken file references, outdated conventions, convention drift
+- Freshness scoring (fresh / needs-review / stale) with actionable recommendations
+- `/install-rules-audit` command to set up GitHub Actions CI integration
+- Standalone workflow that audits affected rules on every PR using `claude-code-action`
+
+**Triggers when you ask to:**
+- Audit or review rules quality and freshness
+- Find stale or broken rules
+- Improve progressive disclosure setup
+- Check if CLAUDE.md files are up to date
+- Install rules audit CI workflow
+
+```
+/plugin install rules-auditor@claude-depot
+```
+
+### continual-learning
+
+Hooks that enable Claude Code to learn, reflect, and persist knowledge across sessions.
+
+**What it provides:**
+- Automatic loading of prior learnings at session start (injected into Claude's context)
+- Silent tool usage tracking during sessions (success and failure patterns)
+- End-of-session reflection that detects repeated failure patterns and stores insights
+- Two-tier memory: global (`~/.claude/learnings.db`) cross-project, local (`.claude-memory/learnings.db`) per-repo
+- Automatic decay of stale, low-value learnings (60-day TTL)
+
+**Requirements:** `sqlite3` (pre-installed on macOS/Linux), `jq` (optional)
+
+```
+/plugin install continual-learning@claude-depot
+```
+
 ## Contributing
 
 To add a new plugin, create a subdirectory under `plugins/` with a `.claude-plugin/plugin.json` manifest and add an entry to the root `marketplace.json`.

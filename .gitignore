@@ -4,3 +4,4 @@
 *.skill
 .DS_Store
 dist/
+.tmp/

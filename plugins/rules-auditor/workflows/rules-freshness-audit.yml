@@ -1,0 +1,153 @@
+# Rules Freshness Audit — Detect stale Claude Code rules on PRs
+#
+# This workflow checks if any `.claude/rules/*.md` or `CLAUDE.md` files are
+# affected by code changes in a PR, then uses Claude to review whether those
+# rules need updating.
+#
+# Prerequisites:
+#   - Claude GitHub App installed via `/install-github-app`
+#   - Pre-check script at `.github/scripts/match-affected-rules.sh`
+#
+# Install automatically with: /install-rules-audit
+
+name: Rules Freshness Audit
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      # Source code paths — customize for your project
+      - 'src/**'
+      - 'lib/**'
+      - 'app/**'
+      - 'packages/**'
+      # Config files that may invalidate rules
+      - '*.config.*'
+      - 'package.json'
+      - 'tsconfig*.json'
+      - 'pyproject.toml'
+      - 'Cargo.toml'
+      - 'Dockerfile*'
+      # Rules and memory files themselves
+      - '.claude/**'
+      - 'CLAUDE.md'
+      - '**/CLAUDE.md'
+
+concurrency:
+  group: rules-audit-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  pre-check:
+    name: Check affected rules
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.pull_request.labels.*.name, 'skip-rules-audit')"
+    outputs:
+      needs_audit: ${{ steps.check.outputs.needs_audit }}
+      affected_rules: ${{ steps.check.outputs.affected_rules }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine affected rules
+        id: check
+        run: |
+          # Get changed files relative to PR base
+          changed_files=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }}...HEAD)
+
+          if [ -z "$changed_files" ]; then
+            echo "No changed files detected."
+            echo "needs_audit=false" >> "$GITHUB_OUTPUT"
+            echo "affected_rules=" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Run the pre-check script
+          echo "$changed_files" | bash .github/scripts/match-affected-rules.sh
+
+  audit:
+    name: Audit affected rules
+    runs-on: ubuntu-latest
+    needs: pre-check
+    if: needs.pre-check.outputs.needs_audit == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Inject CI auditor rules
+        run: |
+          mkdir -p .claude/rules
+          cat > .claude/rules/ci-auditor.md << 'RULES'
+          ---
+          paths:
+            - ".claude/**"
+            - "**/CLAUDE.md"
+          ---
+
+          # CI Rules Freshness Auditor
+
+          You are reviewing rules and CLAUDE.md files for freshness as part of a PR review.
+
+          ## Your Task
+
+          For each affected rule or CLAUDE.md file listed in the prompt:
+          1. Read the file
+          2. If it's a scoped rule, check that its `paths:` globs match existing files
+          3. Check if file paths, function names, or patterns referenced in the rule still exist
+          4. Compare the rule's instructions against the actual code changes in this PR
+          5. Determine if the rule needs updating based on the PR's changes
+
+          ## Output Format
+
+          Post a single PR comment with your findings. Use this format:
+
+          ### Rules Freshness Audit
+
+          | File | Status | Finding |
+          |------|--------|---------|
+          | `.claude/rules/example.md` | fresh/needs-review/stale | Brief explanation |
+
+          #### Details
+
+          For each file that is not "fresh", provide:
+          - What specifically is stale or needs review
+          - Concrete recommendation for how to update it
+          - Whether it should be updated in this PR or as a follow-up
+
+          If all rules are fresh, post a brief confirmation comment instead.
+
+          ## Status Definitions
+
+          - **fresh**: Rule accurately reflects the current codebase after this PR
+          - **needs-review**: Rule may be drifting — patterns described are partially present or the PR makes related changes
+          - **stale**: Rule references files, patterns, or conventions that this PR removes, renames, or contradicts
+          RULES
+
+      - name: Run Claude audit
+        uses: anthropics/claude-code-action@v1
+        with:
+          mode: agent
+          prompt: |
+            You are a rules freshness auditor. Review the following affected rules/memory files against this PR's changes.
+
+            Repository: ${{ github.repository }}
+            PR: #${{ github.event.pull_request.number }}
+            Base branch: ${{ github.event.pull_request.base.ref }}
+
+            Affected rules and memory files:
+            ${{ needs.pre-check.outputs.affected_rules }}
+
+            For each affected file:
+            1. Read the file and understand its purpose
+            2. Run `git diff origin/${{ github.event.pull_request.base.ref }}...HEAD` to see what changed
+            3. Check if the rule's paths: globs still match existing files
+            4. Check if referenced files, functions, or patterns still exist
+            5. Assess whether the PR's changes make any rule instructions stale
+
+            Post your findings as a PR comment using `gh pr comment ${{ github.event.pull_request.number }}`.
+          allowed_tools: "Read,Glob,Grep,Bash(git diff:*),Bash(git log:*),Bash(find:*),Bash(ls:*),Bash(gh pr comment:*)"
+          max_turns: 15

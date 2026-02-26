@@ -27,6 +27,20 @@
       "description": "AI-powered search and access to 573 Anthropic documentation paths — Claude Code CLI, API, Agent SDK, and more",
       "category": "documentation",
       "tags": ["docs", "documentation", "search", "claude-code", "api", "agent-sdk"]
+    },
+    {
+      "name": "rules-auditor",
+      "source": "./plugins/rules-auditor",
+      "description": "Audit Claude Code rules and CLAUDE.md files for staleness, quality, and drift against the actual codebase",
+      "category": "development",
+      "tags": ["rules", "claude-md", "freshness", "audit", "progressive-disclosure", "github-actions"]
+    },
+    {
+      "name": "continual-learning",
+      "source": "./plugins/continual-learning",
+      "description": "Hooks that enable Claude Code to learn, reflect, and persist knowledge across sessions via two-tier SQLite memory",
+      "category": "development",
+      "tags": ["learning", "memory", "reflection", "productivity", "hooks"]
     }
   ]
 }

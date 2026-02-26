@@ -1,0 +1,13 @@
+{
+  "name": "continual-learning",
+  "description": "Hooks that enable Claude Code to learn, reflect, and persist knowledge across sessions via two-tier SQLite memory (global + per-repo)",
+  "version": "1.0.0",
+  "author": {
+    "name": "seanGSISG",
+    "url": "https://github.com/seanGSISG"
+  },
+  "homepage": "https://github.com/seanGSISG/claude-depot",
+  "repository": "https://github.com/seanGSISG/claude-depot",
+  "license": "MIT",
+  "keywords": ["learning", "memory", "reflection", "productivity", "hooks", "sqlite"]
+}

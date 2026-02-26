@@ -1,0 +1,13 @@
+{
+  "name": "rules-auditor",
+  "description": "Audit Claude Code rules and CLAUDE.md files for staleness, quality, and drift against the actual codebase",
+  "version": "1.0.0",
+  "author": {
+    "name": "seanGSISG",
+    "url": "https://github.com/seanGSISG"
+  },
+  "homepage": "https://github.com/seanGSISG/claude-depot",
+  "repository": "https://github.com/seanGSISG/claude-depot",
+  "license": "MIT",
+  "keywords": ["claude-code", "rules", "claude-md", "freshness", "audit", "progressive-disclosure", "github-actions"]
+}
