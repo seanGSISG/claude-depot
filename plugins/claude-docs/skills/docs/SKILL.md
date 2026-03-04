@@ -47,17 +47,20 @@ Extract from the user's query:
 
 ### Step 2: Run Search
 
-Use the search script at `${CLAUDE_PLUGIN_ROOT}/scripts/search-docs.py`:
+Use the upstream helper script at `~/.claude-code-docs/claude-docs-helper.sh`:
 
 ```bash
 # Content search (best for questions and concepts)
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/search-docs.py --search-content "<keywords>"
+~/.claude-code-docs/claude-docs-helper.sh --search-content "<keywords>"
 
 # Path search (best for finding specific docs)
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/search-docs.py --search "<keywords>"
+~/.claude-code-docs/claude-docs-helper.sh --search "<keywords>"
+
+# Direct topic lookup (fastest for known topics)
+~/.claude-code-docs/claude-docs-helper.sh <topic>
 ```
 
-If Python 3.9+ is unavailable, fall back to Grep:
+If the helper script is unavailable, fall back to Grep:
 ```bash
 grep -ril "<keyword>" ~/.claude-code-docs/docs/ | head -20
 ```
@@ -100,34 +103,34 @@ Some queries span multiple reference files or require special handling:
 | "Show me all docs about X" | Run path search, present grouped by product category |
 | "hooks" (ambiguous — CLI hooks vs Agent SDK hooks) | Search content, check categories — if split across products, ask user |
 | Direct topic name (e.g., "mcp", "memory") | Try direct file read first: `~/.claude-code-docs/docs/docs__en__<topic>.md` |
-| Freshness check (`-t`) | Run: `cd ~/.claude-code-docs && git fetch --quiet origin main && git rev-list HEAD..origin/main --count` |
-| "what's new" | Run: `cd ~/.claude-code-docs && git log --oneline -10 -- docs/*.md` |
+| Freshness check (`-t`) | Run: `~/.claude-code-docs/claude-docs-helper.sh -t` |
+| "what's new" | Run: `~/.claude-code-docs/claude-docs-helper.sh "what's new"` |
 
 ## Key Commands Quick Reference
 
 ```bash
 # Content search (returns JSON with product context)
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/search-docs.py --search-content "extended thinking"
+~/.claude-code-docs/claude-docs-helper.sh --search-content "extended thinking"
 
 # Path search (returns ranked path matches)
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/search-docs.py --search "hooks"
+~/.claude-code-docs/claude-docs-helper.sh --search "hooks"
 
-# Direct doc read (fastest for known topics)
-cat ~/.claude-code-docs/docs/docs__en__hooks.md
+# Direct topic lookup
+~/.claude-code-docs/claude-docs-helper.sh hooks
 
 # List all available docs
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/search-docs.py --list
+ls ~/.claude-code-docs/docs/*.md | sed 's/.*\///' | sed 's/\.md$//'
+
+# Check freshness and sync
+~/.claude-code-docs/claude-docs-helper.sh -t
+
+# What's new
+~/.claude-code-docs/claude-docs-helper.sh "what's new"
 
 # Installation status
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/search-docs.py --status
+~/.claude-code-docs/claude-docs-helper.sh --status
 
-# Check for updates
-cd ~/.claude-code-docs && git fetch --quiet origin main && git rev-list HEAD..origin/main --count
-
-# Pull updates
-cd ~/.claude-code-docs && git pull --quiet origin main
-
-# Fallback search (no Python)
+# Fallback search (no helper script)
 grep -ril "keyword" ~/.claude-code-docs/docs/ | head -20
 ```
 
@@ -136,5 +139,5 @@ grep -ril "keyword" ~/.claude-code-docs/docs/ | head -20
 - **Documentation is a mirror, not the source.** Always note that content comes from Anthropic's official documentation. Include official URLs when citing.
 - **Two base URLs:** Claude Code CLI pages are at `code.claude.com/docs/en/<page>`. Everything else is at `platform.claude.com/<path>`.
 - **Search index required for content search.** If `~/.claude-code-docs/docs/.search_index.json` is missing, content search won't work. Rebuild with: `cd ~/.claude-code-docs && python3 scripts/build_search_index.py`
-- **Python 3.9+ is optional.** The search script requires it, but documentation can still be read directly or searched with grep.
+- **Helper script requires Python 3.9+ for enhanced features.** Basic topic lookup and freshness checks work without Python. Content and path search need Python.
 - **571 files, 573 manifest paths.** Two paths in the manifest may not have corresponding files (expected — they are tracked but not downloadable).
