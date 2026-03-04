@@ -22,38 +22,41 @@ jobs:
       - name: Install dependencies
         run: pip install pyyaml
 
-      - name: Determine which skills to build
+      - name: Determine which plugins to build
         id: scope
         run: |
           TAG="${GITHUB_REF_NAME}"
           if [[ "$TAG" == v* ]]; then
             echo "mode=all" >> "$GITHUB_OUTPUT"
           else
-            SKILL_NAME="${TAG%-v*}"
+            PLUGIN_NAME="${TAG%-v*}"
             echo "mode=single" >> "$GITHUB_OUTPUT"
-            echo "skill_name=${SKILL_NAME}" >> "$GITHUB_OUTPUT"
+            echo "plugin_name=${PLUGIN_NAME}" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Verify tag-to-plugin.json version consistency
         run: |
           TAG="${GITHUB_REF_NAME}"
           MODE="${{ steps.scope.outputs.mode }}"
-          SKILL_NAME="${{ steps.scope.outputs.skill_name }}"
+          PLUGIN_NAME="${{ steps.scope.outputs.plugin_name }}"
           ERRORS=0
 
           if [[ "$MODE" == "single" ]]; then
             # Single plugin tag: trmm-expert-v1.2.0 → version 1.2.0
             TAG_VERSION="${TAG##*-v}"
-            PLUGIN_JSON="plugins/${SKILL_NAME}/.claude-plugin/plugin.json"
+            PLUGIN_JSON="plugins/${PLUGIN_NAME}/.claude-plugin/plugin.json"
             if [ -f "$PLUGIN_JSON" ]; then
               JSON_VERSION=$(python -c "import json; print(json.load(open('$PLUGIN_JSON'))['version'])")
               if [[ "$TAG_VERSION" != "$JSON_VERSION" ]]; then
                 echo "::error::Tag version ($TAG_VERSION) does not match $PLUGIN_JSON version ($JSON_VERSION)"
-                echo "  Run: ./scripts/bump-version.sh $SKILL_NAME $TAG_VERSION"
+                echo "  Run: ./scripts/bump-version.sh $PLUGIN_NAME $TAG_VERSION"
                 ERRORS=1
               else
-                echo "Version match: $SKILL_NAME $JSON_VERSION"
+                echo "Version match: $PLUGIN_NAME $JSON_VERSION"
               fi
+            else
+              echo "::error::Plugin not found: $PLUGIN_JSON"
+              ERRORS=1
             fi
           fi
 
@@ -67,37 +70,39 @@ jobs:
           VALIDATE="plugins/skill-creator-enhanced/scripts/quick_validate.py"
           TAG="${GITHUB_REF_NAME}"
           MODE="${{ steps.scope.outputs.mode }}"
-          SKILL_NAME="${{ steps.scope.outputs.skill_name }}"
+          PLUGIN_NAME="${{ steps.scope.outputs.plugin_name }}"
           BUILT=0
 
           for skill_dir in plugins/*/skills/*/; do
-            name=$(basename "$skill_dir")
+            skill_name=$(basename "$skill_dir")
+            # Extract the plugin directory name (2nd path component)
+            plugin_dir_name=$(echo "$skill_dir" | cut -d'/' -f2)
 
-            # Skip if single-skill mode and this isn't the target
-            if [[ "$MODE" == "single" && "$name" != "$SKILL_NAME" ]]; then
+            # Skip if single-plugin mode and this isn't the target plugin
+            if [[ "$MODE" == "single" && "$plugin_dir_name" != "$PLUGIN_NAME" ]]; then
               continue
             fi
 
             if [ ! -f "$skill_dir/SKILL.md" ]; then
-              echo "::warning::Skipping $name — no SKILL.md"
+              echo "::warning::Skipping $skill_name — no SKILL.md"
               continue
             fi
 
-            echo "--- Validating $name ---"
+            echo "--- Validating $skill_name ---"
             if ! python "$VALIDATE" "$skill_dir"; then
-              echo "::error::Validation failed for $name"
+              echo "::error::Validation failed for $skill_name"
               exit 1
             fi
 
-            echo "--- Packaging $name ---"
+            echo "--- Packaging $skill_name ---"
             parent_dir=$(dirname "$skill_dir")
-            (cd "$parent_dir" && zip -r "$GITHUB_WORKSPACE/dist/${name}.skill" "$name" -x '*/__pycache__/*' '*.pyc')
+            (cd "$parent_dir" && zip -r "$GITHUB_WORKSPACE/dist/${skill_name}.skill" "$skill_name" -x '*/__pycache__/*' '*.pyc')
             BUILT=$((BUILT + 1))
-            echo "Built: dist/${name}.skill"
+            echo "Built: dist/${skill_name}.skill"
           done
 
           if [[ "$BUILT" -eq 0 ]]; then
-            echo "::error::No skills were built"
+            echo "::error::No skills were built — check that plugins/${PLUGIN_NAME}/skills/*/SKILL.md exists"
             exit 1
           fi
           echo "Built $BUILT skill(s)"
