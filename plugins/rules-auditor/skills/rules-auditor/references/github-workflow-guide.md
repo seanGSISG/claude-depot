@@ -42,10 +42,10 @@ The workflow's `on.pull_request.paths` filter skips PRs that only touch files ir
 
 A lightweight bash job that:
 1. Gets the list of changed files from `git diff`
-2. Finds all `.claude/rules/*.md` files and `CLAUDE.md` files
+2. Finds all `.claude/rules/*.md` files and `CLAUDE.md`/`AGENTS.md` files
 3. Parses `paths:` frontmatter from each rule
 4. Checks if any changed file matches any rule's globs
-5. Also checks if any `CLAUDE.md` file's directory subtree contains changes
+5. Also checks if any `CLAUDE.md`/`AGENTS.md` file's directory subtree contains changes
 6. Outputs `needs_audit=true` and the list of affected rules if matches found
 
 ### Stage 3: Audit Job (Claude Code Action)
@@ -82,6 +82,8 @@ on:
       - '.claude/**'
       - 'CLAUDE.md'
       - '**/CLAUDE.md'
+      - 'AGENTS.md'
+      - '**/AGENTS.md'
 ```
 
 The `paths:` list should be customized per project. The `/install-rules-audit` command auto-detects the project's source directories.
@@ -261,7 +263,7 @@ Modify the label check to use a different label name or add a force label.
 
 ### Audit doesn't run on PRs
 
-1. Check that the PR changes files matching the `paths:` filter
+1. Check that the PR changes files matching the `paths:` filter (includes CLAUDE.md and AGENTS.md patterns)
 2. Verify the Claude GitHub App is installed (`/install-github-app`)
 3. Check for the `skip-rules-audit` label on the PR
 4. Review the pre-check job output — it may have determined no rules are affected

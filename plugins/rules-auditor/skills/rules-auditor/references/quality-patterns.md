@@ -1,13 +1,15 @@
-# Quality Patterns for Claude Code Rules and CLAUDE.md
+# Quality Patterns for Claude Code Rules and CLAUDE.md/AGENTS.md
 
 > Sources: Claude Code documentation on memory files, rules, and progressive disclosure; real-world examples from production codebases.
+
+Note: AGENTS.md is a third-party alternative to CLAUDE.md that uses the exact same format, frontmatter, `@imports`, nesting behavior, and progressive disclosure conventions. Everything in this document that applies to CLAUDE.md applies equally to AGENTS.md. Projects may use one or both — audit whichever is present.
 
 ## Table of Contents
 
 - [The Litmus Test](#the-litmus-test)
-- [Root CLAUDE.md Guidelines](#root-claudemd-guidelines)
+- [Root CLAUDE.md/AGENTS.md Guidelines](#root-claudemdagentsmd-guidelines)
 - [Path-Scoped Rules Guidelines](#path-scoped-rules-guidelines)
-- [Nested CLAUDE.md Guidelines](#nested-claudemd-guidelines)
+- [Nested CLAUDE.md/AGENTS.md Guidelines](#nested-claudemdagentsmd-guidelines)
 - [Emphasis and Priority](#emphasis-and-priority)
 - [The Progressive Disclosure Tiers](#the-progressive-disclosure-tiers)
 - [Effective @imports](#effective-imports)
@@ -23,9 +25,9 @@ If the answer is no, cut it. Every line competes for context attention. Unnecess
 
 A related test: **"Can Claude figure this out by reading the code?"** If yes, don't put it in rules. Rules should encode knowledge that isn't obvious from the codebase itself — architectural decisions, non-obvious conventions, workflow requirements, things that look wrong but are intentional.
 
-## Root CLAUDE.md Guidelines
+## Root CLAUDE.md/AGENTS.md Guidelines
 
-The root `CLAUDE.md` is loaded on every session. It's the most expensive file in terms of context — it's always present, always competing for attention.
+The root `CLAUDE.md` (or `AGENTS.md`) is loaded on every session. It's the most expensive file in terms of context — it's always present, always competing for attention.
 
 ### What to Include
 
@@ -45,7 +47,7 @@ The root `CLAUDE.md` is loaded on every session. It's the most expensive file in
 
 ### Target Length
 
-Keep root CLAUDE.md to **60-150 lines** of universally applicable instructions. If it exceeds 200 lines, it likely contains content that should be scoped rules or reference files instead.
+Keep root CLAUDE.md/AGENTS.md to **60-150 lines** of universally applicable instructions. If it exceeds 200 lines, it likely contains content that should be scoped rules or reference files instead.
 
 ## Path-Scoped Rules Guidelines
 
@@ -105,19 +107,19 @@ Group rules into subdirectories for large projects:
 - **Include examples**: Short code snippets showing the preferred pattern are more effective than prose descriptions
 - **Explain why**: "We use repository pattern because it enables transaction testing" helps Claude make analogous decisions
 
-## Nested CLAUDE.md Guidelines
+## Nested CLAUDE.md/AGENTS.md Guidelines
 
-Nested CLAUDE.md files work differently from rules:
+Nested CLAUDE.md and AGENTS.md files work differently from rules:
 
 - **Ancestor files** (upward from cwd to repo root): loaded eagerly at startup
 - **Descendant files** (below cwd): loaded lazily when Claude reads files in that subtree
 
 ### When to Use
 
-Nested CLAUDE.md is best for **monorepo component boundaries**:
+Nested CLAUDE.md/AGENTS.md is best for **monorepo component boundaries**:
 
 ```
-CLAUDE.md                    # Root: universal instructions
+CLAUDE.md                    # Root: universal instructions (or AGENTS.md)
 frontend/CLAUDE.md           # Frontend-specific: React conventions, build commands
 backend/CLAUDE.md            # Backend-specific: API patterns, database conventions
 deploy/CLAUDE.md             # Deployment-specific: Docker, CI conventions
@@ -125,11 +127,11 @@ deploy/CLAUDE.md             # Deployment-specific: Docker, CI conventions
 
 ### Keep Concise
 
-All ancestor CLAUDE.md files accumulate — they all compete for context attention together with root CLAUDE.md. A nested CLAUDE.md should be **30-60 lines** at most, covering only what's unique to that subtree.
+All ancestor CLAUDE.md/AGENTS.md files accumulate — they all compete for context attention together with the root file. A nested file should be **30-60 lines** at most, covering only what's unique to that subtree.
 
 ### Avoid Duplication
 
-Don't repeat instructions from parent CLAUDE.md files. The nested file should only contain what's different or additional for that directory subtree.
+Don't repeat instructions from parent CLAUDE.md/AGENTS.md files. The nested file should only contain what's different or additional for that directory subtree.
 
 ## Emphasis and Priority
 
@@ -150,7 +152,7 @@ or define a proper interface.
 
 An effective setup uses tiered context that loads progressively:
 
-### Tier 0: Root CLAUDE.md
+### Tier 0: Root CLAUDE.md/AGENTS.md
 
 The gateway. Contains universal directives, `@imports` for stable references, and pointers to deeper context. Always loaded. Keep minimal.
 

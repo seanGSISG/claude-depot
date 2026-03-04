@@ -1,17 +1,17 @@
 ---
 name: rules-auditor
-description: "Audit Claude Code rules and CLAUDE.md files for staleness, quality, and drift. Use when asked to audit rules, check stale CLAUDE.md, review rules freshness, assess rules quality, improve my rules, find dead globs in rules, check if rules are up to date, review progressive disclosure setup, find contradictory rules, or optimize Claude Code memory files."
+description: "Audit Claude Code rules and CLAUDE.md/AGENTS.md files for staleness, quality, and drift. Use when asked to audit rules, check stale CLAUDE.md, check stale AGENTS.md, review rules freshness, assess rules quality, improve my rules, find dead globs in rules, check if rules are up to date, review progressive disclosure setup, find contradictory rules, or optimize Claude Code memory files."
 ---
 
 ## Overview
 
-This skill audits and improves Claude Code memory files — `.claude/rules/*.md`, `CLAUDE.md`, and `CLAUDE.local.md`. It detects staleness (dead globs, references to deleted files, outdated conventions), quality issues (bloat, contradictions, redundancy), and provides actionable recommendations.
+This skill audits and improves Claude Code memory files — `.claude/rules/*.md`, `CLAUDE.md`, `CLAUDE.local.md`, and their `AGENTS.md`/`AGENTS.local.md` equivalents. AGENTS.md is a third-party alternative that uses the exact same rules, frontmatter, and progressive disclosure conventions as CLAUDE.md but with a different filename. This skill treats both identically.
 
 Use this skill when asked to:
 - Audit or review rules quality and freshness
 - Find stale or broken rules
 - Improve progressive disclosure setup
-- Check if CLAUDE.md files are up to date
+- Check if CLAUDE.md or AGENTS.md files are up to date
 - Optimize Claude Code context loading
 
 ## Discovery Workflow
@@ -24,11 +24,13 @@ Before auditing, discover all memory files in the project:
 find .claude/rules -name "*.md" -type f 2>/dev/null | sort
 ```
 
-### 2. Find all CLAUDE.md files
+### 2. Find all CLAUDE.md and AGENTS.md files
 
 ```bash
-find . -name "CLAUDE.md" -o -name "CLAUDE.local.md" | grep -v node_modules | grep -v .git | sort
+find . \( -name "CLAUDE.md" -o -name "CLAUDE.local.md" -o -name "AGENTS.md" -o -name "AGENTS.local.md" \) | grep -v node_modules | grep -v .git | sort
 ```
+
+Note: AGENTS.md is a third-party alternative to CLAUDE.md that uses the exact same format, frontmatter, and rules conventions. Treat AGENTS.md files identically to CLAUDE.md files throughout the audit.
 
 ### 3. Parse scoping from each rule
 
@@ -47,8 +49,8 @@ sed -n '/^---$/,/^---$/p' "$rule_file" | grep -A 50 '^paths:' | grep '^ *- ' | s
 Classify each file:
 - Rule files with `paths:` → scoped rules (note the globs)
 - Rule files without `paths:` → global rules
-- Root `CLAUDE.md` → always loaded (ancestor of cwd)
-- Nested `CLAUDE.md` files → loaded lazily when Claude reads files in that subtree
+- Root `CLAUDE.md` or `AGENTS.md` → always loaded (ancestor of cwd)
+- Nested `CLAUDE.md`/`AGENTS.md` files → loaded lazily when Claude reads files in that subtree
 
 ## Audit Workflow
 
@@ -97,9 +99,9 @@ For rules describing code conventions or patterns:
 3. Check if the described pattern appears in a majority of matching files
 4. Flag if <50% of files follow the described convention
 
-### Step 5: Structural Verification (nested CLAUDE.md)
+### Step 5: Structural Verification (nested CLAUDE.md/AGENTS.md)
 
-For nested CLAUDE.md files, verify:
+For nested CLAUDE.md and AGENTS.md files, verify:
 - The directory structure they describe still exists
 - Commands they reference (build, test, lint) still work
 - Technology/framework references match actual dependencies
@@ -126,7 +128,7 @@ Produce a structured report with:
 
 | Topic | Reference File | Key Contents |
 |---|---|---|
-| What makes effective rules and CLAUDE.md | `references/quality-patterns.md` | Root CLAUDE.md guidelines, scoped rules best practices, progressive disclosure tiers, emphasis patterns |
+| What makes effective rules and CLAUDE.md/AGENTS.md | `references/quality-patterns.md` | Root CLAUDE.md/AGENTS.md guidelines, scoped rules best practices, progressive disclosure tiers, emphasis patterns |
 | Common mistakes to avoid | `references/anti-patterns.md` | Kitchen sink files, volatile imports, negative-only constraints, linter duplication, redundancy |
 | Detecting drift and staleness | `references/staleness-detection.md` | Dead globs, referenced file drift, API pattern drift, version pinning, convention drift, scoring |
 | CI integration with GitHub Actions | `references/github-workflow-guide.md` | Workflow architecture, setup instructions, cost optimization, claude-code-action configuration |

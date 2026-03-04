@@ -1,6 +1,8 @@
-# Anti-Patterns in Claude Code Rules and CLAUDE.md
+# Anti-Patterns in Claude Code Rules and CLAUDE.md/AGENTS.md
 
 > Sources: Claude Code documentation, community observations, production codebase audits.
+
+Note: AGENTS.md is a third-party alternative to CLAUDE.md that uses the exact same format and conventions. All anti-patterns described here apply equally to AGENTS.md files.
 
 ## Table of Contents
 
@@ -17,7 +19,7 @@
 
 ## The Kitchen Sink
 
-**Symptom**: CLAUDE.md or a rules file that grew via incremental accumulation to 500+ lines.
+**Symptom**: CLAUDE.md/AGENTS.md or a rules file that grew via incremental accumulation to 500+ lines.
 
 **Problem**: Important rules get lost in noise. Claude's attention is finite — when everything is "important," nothing is. Long files cause Claude to start ignoring instructions because they compete with each other for relevance.
 
@@ -57,11 +59,11 @@ Good:
 Never use the --foo-bar flag; use --baz-qux instead, which provides the same functionality without the side effects.
 ```
 
-## Linter Rules in CLAUDE.md
+## Linter Rules in CLAUDE.md/AGENTS.md
 
 **Symptom**: Rules files specifying code style — indentation width, semicolons vs. no semicolons, import ordering, bracket placement.
 
-**Problem**: Code style enforcement belongs in linter/formatter configs (`.eslintrc`, `.prettierrc`, `ruff.toml`). Putting these in CLAUDE.md means: (1) they compete for attention with important architectural rules, (2) they can drift from the actual linter config, (3) Claude may follow the rule but the linter rejects the output anyway.
+**Problem**: Code style enforcement belongs in linter/formatter configs (`.eslintrc`, `.prettierrc`, `ruff.toml`). Putting these in CLAUDE.md/AGENTS.md means: (1) they compete for attention with important architectural rules, (2) they can drift from the actual linter config, (3) Claude may follow the rule but the linter rejects the output anyway.
 
 **How to detect**: Look for rules mentioning indentation, tabs, spaces, semicolons, trailing commas, import order, bracket style, line length, or other purely stylistic concerns.
 
@@ -102,7 +104,7 @@ Never use the --foo-bar flag; use --baz-qux instead, which provides the same fun
 
 **How to detect**: Compare instructions across all memory files. Look for:
 - Global rule says one thing, scoped rule says the opposite
-- Root CLAUDE.md conflicts with nested CLAUDE.md
+- Root CLAUDE.md/AGENTS.md conflicts with nested CLAUDE.md/AGENTS.md
 - Different scoped rules give different instructions for overlapping file patterns
 
 **Common contradictions**:
@@ -130,7 +132,7 @@ Never use the --foo-bar flag; use --baz-qux instead, which provides the same fun
 
 **How to detect**: Look for identical or near-identical paragraphs across different memory files.
 
-**Fix**: Move shared conventions to a global rule or root CLAUDE.md. Scoped rules should contain only what's unique to their scope.
+**Fix**: Move shared conventions to a global rule or root CLAUDE.md/AGENTS.md. Scoped rules should contain only what's unique to their scope.
 
 ## Stale Version Pins
 

@@ -1,8 +1,8 @@
 # Rules Freshness Audit — Detect stale Claude Code rules on PRs
 #
-# This workflow checks if any `.claude/rules/*.md` or `CLAUDE.md` files are
-# affected by code changes in a PR, then uses Claude to review whether those
-# rules need updating.
+# This workflow checks if any `.claude/rules/*.md`, `CLAUDE.md`, or `AGENTS.md`
+# files are affected by code changes in a PR, then uses Claude to review whether
+# those rules need updating.
 #
 # Prerequisites:
 #   - Claude GitHub App installed via `/install-github-app`
@@ -32,6 +32,8 @@ on:
       - '.claude/**'
       - 'CLAUDE.md'
       - '**/CLAUDE.md'
+      - 'AGENTS.md'
+      - '**/AGENTS.md'
 
 concurrency:
   group: rules-audit-${{ github.event.pull_request.number }}
@@ -86,15 +88,17 @@ jobs:
           paths:
             - ".claude/**"
             - "**/CLAUDE.md"
+            - "**/AGENTS.md"
           ---
 
           # CI Rules Freshness Auditor
 
-          You are reviewing rules and CLAUDE.md files for freshness as part of a PR review.
+          You are reviewing rules, CLAUDE.md, and AGENTS.md files for freshness as part of a PR review.
+          Note: AGENTS.md is a third-party alternative to CLAUDE.md that uses the exact same format and conventions. Treat them identically.
 
           ## Your Task
 
-          For each affected rule or CLAUDE.md file listed in the prompt:
+          For each affected rule, CLAUDE.md, or AGENTS.md file listed in the prompt:
           1. Read the file
           2. If it's a scoped rule, check that its `paths:` globs match existing files
           3. Check if file paths, function names, or patterns referenced in the rule still exist

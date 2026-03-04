@@ -40,12 +40,12 @@ Then stop. Do not proceed without the Claude GitHub App.
    ```
    If it exists, ask the user if they want to update it.
 
-3. Check for rules and CLAUDE.md files:
+3. Check for rules, CLAUDE.md, and AGENTS.md files:
    ```bash
    find .claude/rules -name "*.md" -type f 2>/dev/null | head -20
-   find . -name "CLAUDE.md" -o -name "CLAUDE.local.md" 2>/dev/null | grep -v node_modules | grep -v .git | head -20
+   find . \( -name "CLAUDE.md" -o -name "CLAUDE.local.md" -o -name "AGENTS.md" -o -name "AGENTS.local.md" \) 2>/dev/null | grep -v node_modules | grep -v .git | head -20
    ```
-   If no rules or CLAUDE.md files exist, warn the user that there's nothing to audit yet. Suggest they create some rules first, then install the workflow.
+   If no rules, CLAUDE.md, or AGENTS.md files exist, warn the user that there's nothing to audit yet. Suggest they create some rules first, then install the workflow.
 
 4. Discover the project's directory structure for smart path defaults:
    ```bash
@@ -66,6 +66,8 @@ Always include these (they affect rules directly):
 - `.claude/**`
 - `CLAUDE.md`
 - `**/CLAUDE.md`
+- `AGENTS.md`
+- `**/AGENTS.md`
 - Config files: `*.config.*`, `package.json`, `tsconfig*.json`, `pyproject.toml`
 
 Exclude from triggers (these rarely affect rules):

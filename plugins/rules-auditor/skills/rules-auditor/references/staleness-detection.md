@@ -2,6 +2,8 @@
 
 > Sources: Claude Code documentation, claude-rules-doctor project, production codebase audit patterns.
 
+Note: AGENTS.md is a third-party alternative to CLAUDE.md that uses the exact same format and conventions. All staleness detection methods here apply equally to AGENTS.md and AGENTS.local.md files.
+
 ## Table of Contents
 
 - [Overview](#overview)
@@ -16,7 +18,7 @@
 
 ## Overview
 
-Staleness in rules and CLAUDE.md files means the instructions no longer match reality. This happens naturally as codebases evolve — directories get renamed, APIs change, conventions shift. Stale rules are worse than no rules because they actively mislead Claude.
+Staleness in rules and CLAUDE.md/AGENTS.md files means the instructions no longer match reality. This happens naturally as codebases evolve — directories get renamed, APIs change, conventions shift. Stale rules are worse than no rules because they actively mislead Claude.
 
 Detection follows a hierarchy: structural checks (globs, file references) are fast and definitive, while semantic checks (convention drift, API pattern changes) require sampling and judgment.
 

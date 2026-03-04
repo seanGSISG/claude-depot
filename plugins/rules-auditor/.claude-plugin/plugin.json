@@ -1,6 +1,6 @@
 {
   "name": "rules-auditor",
-  "description": "Audit Claude Code rules and CLAUDE.md files for staleness, quality, and drift against the actual codebase",
+  "description": "Audit Claude Code rules and CLAUDE.md/AGENTS.md files for staleness, quality, and drift against the actual codebase",
   "version": "1.0.0",
   "author": {
     "name": "seanGSISG",

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# match-affected-rules.sh — Determine which rules/CLAUDE.md files are affected by changed files
+# match-affected-rules.sh — Determine which rules/CLAUDE.md/AGENTS.md files are affected by changed files
 #
 # Usage:
 #   git diff --name-only origin/main...HEAD | bash match-affected-rules.sh
@@ -52,11 +52,11 @@ if [ -d ".claude/rules" ]; then
   done < <(find .claude/rules -name "*.md" -type f -print0 2>/dev/null)
 fi
 
-# --- Find all CLAUDE.md files ---
+# --- Find all CLAUDE.md and AGENTS.md files ---
 claude_md_files=()
 while IFS= read -r -d '' cf; do
   claude_md_files+=("$cf")
-done < <(find . \( -name "CLAUDE.md" -o -name "CLAUDE.local.md" \) -not -path "./.git/*" -not -path "*/node_modules/*" -print0 2>/dev/null)
+done < <(find . \( -name "CLAUDE.md" -o -name "CLAUDE.local.md" -o -name "AGENTS.md" -o -name "AGENTS.local.md" \) -not -path "./.git/*" -not -path "*/node_modules/*" -print0 2>/dev/null)
 
 # --- Extract paths from YAML frontmatter ---
 # Reads a rules .md file and outputs its paths: globs, one per line
@@ -172,7 +172,7 @@ for rule_file in "${rules_files[@]}"; do
   fi
 done
 
-# --- Check CLAUDE.md files ---
+# --- Check CLAUDE.md and AGENTS.md files ---
 for claude_file in "${claude_md_files[@]}"; do
   claude_dir=$(dirname "$claude_file")
   claude_dir="${claude_dir#./}"
@@ -191,7 +191,7 @@ for claude_file in "${claude_md_files[@]}"; do
   for cf in "${changed_files[@]}"; do
     cf_normalized="${cf#./}"
     if [ "$claude_dir" = "." ]; then
-      # Root CLAUDE.md — affected by any source file change
+      # Root CLAUDE.md/AGENTS.md — affected by any source file change
       # (let the audit job decide if it's relevant)
       affected+=("$claude_file")
       break
@@ -208,7 +208,7 @@ unset IFS
 
 # --- Output ---
 if [ ${#unique_affected[@]} -eq 0 ]; then
-  echo "No rules or CLAUDE.md files affected by changes."
+  echo "No rules or CLAUDE.md/AGENTS.md files affected by changes."
   if [ -n "${GITHUB_OUTPUT:-}" ]; then
     echo "needs_audit=false" >> "$GITHUB_OUTPUT"
     echo "affected_rules=" >> "$GITHUB_OUTPUT"
