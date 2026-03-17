@@ -144,6 +144,27 @@ Claude Code skills for building MCP Apps with interactive UIs and packaging MCP 
 /plugin install mcp-toolkit@claude-depot
 ```
 
+### obsidian
+
+Comprehensive Obsidian skill covering four domains: Markdown (wikilinks, callouts, embeds, properties), Bases (.base files with formulas, filters, views), CLI (vault management, plugin dev), and Web Clipper (JSON templates, AI Interpreter prompts).
+
+**What it provides:**
+- Expert-level answers across all four Obsidian domains with curated official docs
+- Reference files for callouts, embeds, properties, base functions, clipper variables/filters/logic/JSON schema
+- Intelligent routing that loads only the relevant reference(s) per question
+- Official documentation index for edge cases beyond the skill's core content
+
+**Triggers when you ask about:**
+- Obsidian vault structure, notes, daily notes, wikilinks, callouts, embeds, frontmatter/properties
+- Bases (.base files): formulas, filters, views, YAML quoting, functions
+- Obsidian CLI, plugin development, hot-reload, headless mode, URI scheme
+- Web Clipper: JSON templates, variables, filters, logic, AI Interpreter prompts
+- Obsidian-specific problems (e.g., .base YAML errors, callout syntax, clipper templates)
+
+```
+/plugin install obsidian@claude-depot
+```
+
 ## Contributing
 
 To add a new plugin, create a subdirectory under `plugins/` with a `.claude-plugin/plugin.json` manifest and add an entry to the root `marketplace.json`.
