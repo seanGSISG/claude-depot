@@ -41,6 +41,13 @@
       "description": "Hooks that enable Claude Code to learn, reflect, and persist knowledge across sessions via two-tier SQLite memory",
       "category": "development",
       "tags": ["learning", "memory", "reflection", "productivity", "hooks"]
+    },
+    {
+      "name": "mcp-toolkit",
+      "source": "./plugins/mcp-toolkit",
+      "description": "Claude Code skills for building MCP Apps with interactive UIs and packaging MCP servers as MCPB desktop extensions",
+      "category": "development",
+      "tags": ["mcp", "mcp-apps", "mcpb", "model-context-protocol", "desktop-extensions"]
     }
   ]
 }

@@ -119,6 +119,31 @@ Hooks that enable Claude Code to learn, reflect, and persist knowledge across se
 /plugin install continual-learning@claude-depot
 ```
 
+### mcp-toolkit
+
+Claude Code skills for building MCP Apps with interactive UIs and packaging MCP servers as MCPB desktop extensions.
+
+**What it provides:**
+- 6 skills covering the full MCP Apps and MCPB workflow
+- Guidance for creating new MCP servers with interactive UIs (React, Vue, Svelte, Vanilla JS)
+- Enriching existing MCP server tools with UI resources
+- Converting standalone web apps into hybrid MCP Apps
+- Migrating from OpenAI Apps SDK to MCP Apps SDK
+- Packaging MCP servers as `.mcpb` bundles for single-click Claude Desktop installation
+- Complete `manifest.json` reference for MCPB configuration
+
+**Triggers when you ask about:**
+- Creating MCP Apps, adding UI to MCP tools, building interactive MCP Views
+- Adding apps to existing MCP servers, enriching tools with UIs
+- Converting web apps to MCP Apps, hybrid web + MCP patterns
+- Migrating from OpenAI Apps SDK
+- Building and packaging MCPB bundles
+- MCPB manifest configuration, user_config schema, variable substitution
+
+```
+/plugin install mcp-toolkit@claude-depot
+```
+
 ## Contributing
 
 To add a new plugin, create a subdirectory under `plugins/` with a `.claude-plugin/plugin.json` manifest and add an entry to the root `marketplace.json`.
