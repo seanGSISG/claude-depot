@@ -54,6 +54,14 @@ rebuild_index() {
     fi
 }
 
+# Ensure helper script is at root (install.sh copies it, but sync needs to as well)
+install_helper() {
+    if [[ -f "$DOCS_PATH/scripts/claude-docs-helper.sh" ]] && [[ ! -f "$DOCS_PATH/claude-docs-helper.sh" ]]; then
+        cp "$DOCS_PATH/scripts/claude-docs-helper.sh" "$DOCS_PATH/claude-docs-helper.sh" 2>/dev/null || true
+        chmod +x "$DOCS_PATH/claude-docs-helper.sh" 2>/dev/null || true
+    fi
+}
+
 # Main sync logic
 if ! acquire_lock; then
     exit 0
@@ -66,6 +74,7 @@ if [[ ! -d "$DOCS_PATH" ]] || ! is_valid_repo; then
     fi
     # Clone fresh
     if git clone --quiet "$REPO_URL" "$DOCS_PATH" 2>/dev/null; then
+        install_helper
         rebuild_index
     else
         echo "claude-docs: failed to clone docs repo" >&2
@@ -89,8 +98,12 @@ LOCAL=$(git rev-parse HEAD 2>/dev/null || echo "")
 REMOTE=$(git rev-parse "origin/$BRANCH" 2>/dev/null || echo "")
 BEHIND=$(git rev-list "HEAD..origin/$BRANCH" --count 2>/dev/null || echo "0")
 
+# Ensure helper script exists even if no update needed
+install_helper
+
 if [[ "$LOCAL" != "$REMOTE" ]] && [[ "$BEHIND" -gt 0 ]]; then
     if git pull --quiet origin "$BRANCH" 2>/dev/null; then
+        install_helper
         rebuild_index
     fi
 fi
