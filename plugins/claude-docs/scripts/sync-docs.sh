@@ -9,7 +9,7 @@ set -euo pipefail
 
 DOCS_PATH="$HOME/.claude-code-docs"
 REPO_URL="https://github.com/seanGSISG/claude-code-docs.git"
-LOCK_FILE="$DOCS_PATH/.sync.lock"
+LOCK_FILE="/tmp/.claude-code-docs-sync.lock"
 
 # Ensure we never block session start
 trap 'rm -f "$LOCK_FILE" 2>/dev/null; exit 0' EXIT
@@ -27,6 +27,13 @@ acquire_lock() {
     fi
     echo $$ > "$LOCK_FILE" 2>/dev/null || true
     return 0
+}
+
+# Check if DOCS_PATH is a valid git working tree with docs present
+is_valid_repo() {
+    [[ -d "$DOCS_PATH/.git" ]] \
+        && git -C "$DOCS_PATH" rev-parse --show-toplevel &>/dev/null \
+        && [[ -d "$DOCS_PATH/docs" ]]
 }
 
 # Check if Python 3.9+ is available
@@ -52,7 +59,11 @@ if ! acquire_lock; then
     exit 0
 fi
 
-if [[ ! -d "$DOCS_PATH" ]]; then
+if [[ ! -d "$DOCS_PATH" ]] || ! is_valid_repo; then
+    # Remove broken/partial clone if present
+    if [[ -d "$DOCS_PATH" ]]; then
+        rm -rf "$DOCS_PATH" 2>/dev/null || true
+    fi
     # Clone fresh
     if git clone --quiet "$REPO_URL" "$DOCS_PATH" 2>/dev/null; then
         rebuild_index
