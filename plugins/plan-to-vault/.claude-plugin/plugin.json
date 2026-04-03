@@ -1,7 +1,7 @@
 {
   "name": "plan-to-vault",
   "description": "Automatically archive Claude Code plan files to an Obsidian vault when exiting plan mode. Labels each plan with its origin machine for multi-device visibility.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "seanGSISG",
     "url": "https://github.com/seanGSISG"

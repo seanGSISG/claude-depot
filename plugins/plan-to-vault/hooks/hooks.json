@@ -1,5 +1,16 @@
 {
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"if(!process.env.CLAUDE_PLUGIN_OPTION_VAULT_PATH){process.stdout.write(JSON.stringify({additionalContext:'[plan-to-vault] Vault path not configured. Run /plugin → plan-to-vault → Configure options to set your Obsidian vault path.'}))}\"",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "ExitPlanMode",
