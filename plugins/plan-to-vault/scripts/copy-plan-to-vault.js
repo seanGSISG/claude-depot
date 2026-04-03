@@ -102,7 +102,7 @@ async function main() {
   }
 
   const origin = os.hostname();
-  const created = planFile.mtime.toISOString().split("T")[0];
+  const created = planFile.mtime.toLocaleDateString("en-CA", { timeZone: "America/Denver" });
   const body = lines.slice(1).join("\n");
 
   const note = `---
