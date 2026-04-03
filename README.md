@@ -165,6 +165,42 @@ Comprehensive Obsidian skill covering four domains: Markdown (wikilinks, callout
 /plugin install obsidian@claude-depot
 ```
 
+### plan-to-vault
+
+Automatically archive Claude Code plan files to an Obsidian vault when exiting plan mode, with multi-machine origin tracking.
+
+**What it provides:**
+- PostToolUse hook that fires on ExitPlanMode and copies the plan to your vault's `Notes/` directory
+- Frontmatter wrapping with `type: plan`, origin hostname, session ID, and creation date
+- Bulk import skill for migrating existing plans from `~/.claude/plans/`
+- Setup skill for first-time vault path configuration
+
+**Triggers automatically when:**
+- You exit plan mode (ExitPlanMode) — the plan is archived to your vault
+
+```
+/plugin install plan-to-vault@claude-depot
+```
+
+### vault-tools
+
+Vault-specific skills, rules, and hooks for Obsidian knowledge bases — note creation, search, inbox processing, maintenance, and frontmatter validation.
+
+**What it provides:**
+- 9 skills: new-note, vault-search, process-inbox, auto-categorize, vault-stats, vault-maintenance, reclassify, weekly-review, setup
+- PostToolUse hook that validates YAML frontmatter on every write to `Notes/`
+- SessionStart hook that bootstraps `.claude/rules/` with archive protection and frontmatter requirements
+- All scripts are pure Node.js for cross-platform compatibility
+
+**Triggers when you ask about:**
+- Creating, searching, or managing vault notes
+- Processing inbox files, categorizing content
+- Vault statistics, maintenance, or weekly reviews
+
+```
+/plugin install vault-tools@claude-depot
+```
+
 ## Contributing
 
 To add a new plugin, create a subdirectory under `plugins/` with a `.claude-plugin/plugin.json` manifest and add an entry to the root `marketplace.json`.

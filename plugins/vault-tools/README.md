@@ -4,10 +4,11 @@ Vault-specific skills, rules, and hooks for the MyVault Obsidian knowledge base.
 
 ## What's Included
 
-### Skills (8)
+### Skills (9)
 
 | Skill | Purpose |
 |-------|---------|
+| `/setup` | First-time configuration (set vault path) |
 | `/new-note` | Create a note with proper frontmatter |
 | `/vault-search` | Natural language search across vault |
 | `/process-inbox` | Classify Inbox/ files and move to Notes/ |
