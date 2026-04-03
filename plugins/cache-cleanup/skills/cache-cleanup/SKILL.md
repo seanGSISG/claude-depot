@@ -25,8 +25,9 @@ latest version of each plugin.
    and how much space would be freed. If no old versions are found, tell the
    user the cache is already clean and stop.
 
-3. **Confirm**: Ask the user if they want to proceed with deletion. Do NOT
-   delete without explicit confirmation.
+3. **Confirm**: Use the `AskUserQuestion` tool with a yes/no question to ask
+   the user if they want to proceed with deletion. Do NOT delete without
+   explicit confirmation via this tool.
 
 4. **Delete**: Only after the user confirms, run:
    ```bash
