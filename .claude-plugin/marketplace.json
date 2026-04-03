@@ -55,6 +55,13 @@
       "description": "Comprehensive Obsidian skill covering Markdown, Bases, CLI, and Web Clipper templates",
       "category": "documentation",
       "tags": ["obsidian", "markdown", "bases", "web-clipper", "vault", "notes", "knowledge-management"]
+    },
+    {
+      "name": "plan-to-vault",
+      "source": "./plugins/plan-to-vault",
+      "description": "Automatically archive Claude Code plan files to an Obsidian vault when exiting plan mode, with multi-machine origin tracking",
+      "category": "development",
+      "tags": ["obsidian", "plans", "vault", "planning", "sync", "hooks", "archive"]
     }
   ]
 }

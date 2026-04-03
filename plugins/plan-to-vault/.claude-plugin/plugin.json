@@ -1,0 +1,19 @@
+{
+  "name": "plan-to-vault",
+  "description": "Automatically archive Claude Code plan files to an Obsidian vault when exiting plan mode. Labels each plan with its origin machine for multi-device visibility.",
+  "version": "1.0.0",
+  "author": {
+    "name": "seanGSISG",
+    "url": "https://github.com/seanGSISG"
+  },
+  "homepage": "https://github.com/seanGSISG/claude-depot",
+  "repository": "https://github.com/seanGSISG/claude-depot",
+  "license": "MIT",
+  "keywords": ["obsidian", "plans", "vault", "planning", "sync", "notes", "archive"],
+  "userConfig": {
+    "vault_path": {
+      "description": "Absolute path to your Obsidian vault (e.g., /home/user/Vaults/MyVault or C:\\Users\\user\\Vaults\\MyVault)",
+      "sensitive": false
+    }
+  }
+}
