@@ -95,6 +95,7 @@ tags:
   - claude-code
 origin: ${origin}
 plan-file: "${planFile.name}"
+session-id: ""
 created: ${created}
 status: active
 ---

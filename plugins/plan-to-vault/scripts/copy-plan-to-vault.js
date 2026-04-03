@@ -38,6 +38,8 @@ async function main() {
     process.exit(0);
   }
 
+  const sessionId = payload.session_id || "";
+
   // Read vault path from plugin userConfig
   const vaultPath = process.env.CLAUDE_PLUGIN_OPTION_VAULT_PATH;
   if (!vaultPath) {
@@ -113,6 +115,7 @@ tags:
   - claude-code
 origin: ${origin}
 plan-file: "${planFile.name}"
+session-id: "${sessionId}"
 created: ${created}
 status: active
 ---
