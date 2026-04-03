@@ -1,0 +1,21 @@
+{
+  "name": "vault-tools",
+  "description": "Vault-specific skills, rules, and hooks for the MyVault Obsidian knowledge base. Provides note creation, search, inbox processing, maintenance, and frontmatter validation.",
+  "version": "1.0.0",
+  "author": {
+    "name": "seanGSISG",
+    "url": "https://github.com/seanGSISG"
+  },
+  "homepage": "https://github.com/seanGSISG/claude-depot",
+  "repository": "https://github.com/seanGSISG/claude-depot",
+  "license": "MIT",
+  "keywords": ["obsidian", "vault", "notes", "frontmatter", "knowledge-base"],
+  "userConfig": {
+    "vault_path": {
+      "title": "Obsidian Vault Path",
+      "type": "directory",
+      "description": "Absolute path to your Obsidian vault (e.g., /home/user/Vaults/MyVault or C:\\Users\\user\\Vaults\\MyVault)",
+      "sensitive": false
+    }
+  }
+}
