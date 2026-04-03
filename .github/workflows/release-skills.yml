@@ -26,24 +26,39 @@ jobs:
       - name: Install dependencies
         run: pip install pyyaml
 
-      - name: Validate and package all skills
+      - name: Validate all skills
+        run: |
+          VALIDATE="plugins/skill-creator-enhanced/scripts/quick_validate.py"
+          for skill_dir in plugins/*/skills/*/; do
+            if [ ! -f "$skill_dir/SKILL.md" ]; then
+              continue
+            fi
+            echo "--- Validating $(basename "$skill_dir") ---"
+            if ! python "$VALIDATE" "$skill_dir"; then
+              echo "::error::Validation failed for $(basename "$skill_dir")"
+              exit 1
+            fi
+          done
+
+      - name: Package .skill files for Claude.ai-compatible plugins
         run: |
           mkdir -p dist
-          VALIDATE="plugins/skill-creator-enhanced/scripts/quick_validate.py"
+          # Only package skills from plugins that work standalone in Claude.ai.
+          # Plugins with hooks/scripts are Claude Code-only — use /plugin install.
+          SKIP_PLUGINS="vault-tools plan-to-vault continual-learning"
           BUILT=0
 
           for skill_dir in plugins/*/skills/*/; do
             skill_name=$(basename "$skill_dir")
+            plugin_name=$(echo "$skill_dir" | cut -d'/' -f2)
 
             if [ ! -f "$skill_dir/SKILL.md" ]; then
-              echo "::warning::Skipping $skill_name — no SKILL.md"
               continue
             fi
 
-            echo "--- Validating $skill_name ---"
-            if ! python "$VALIDATE" "$skill_dir"; then
-              echo "::error::Validation failed for $skill_name"
-              exit 1
+            if echo "$SKIP_PLUGINS" | grep -qw "$plugin_name"; then
+              echo "Skipping $skill_name (plugin $plugin_name is Claude Code-only)"
+              continue
             fi
 
             echo "--- Packaging $skill_name ---"

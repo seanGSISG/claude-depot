@@ -13,27 +13,25 @@ A curated depot of Claude Code plugins — skills, tools, and extensions.
 
 ### Claude.ai / Claude Desktop
 
-Download a `.skill` file from the table below, then upload via **Settings > Skills**.
+Download a `.skill` file from the table below, then upload via **Settings > Features > Skills**.
 
 ## Plugins
 
-| Plugin | Description | .skill Download | Install |
-|---|---|---|---|
-| **trmm-expert** | Tactical RMM documentation expert | [trmm-expert.skill][trmm-expert] | `/plugin install trmm-expert@claude-depot` |
-| **claude-docs** | Anthropic docs search (573 paths) | [docs.skill][docs] | `/plugin install claude-docs@claude-depot` |
-| **skill-creator-enhanced** | Skill creation guide with validators | [skill-creator-enhanced.skill][skill-creator] | `/plugin install skill-creator-enhanced@claude-depot` |
-| **rules-auditor** | Audit rules for staleness and quality | [rules-auditor.skill][rules-auditor] | `/plugin install rules-auditor@claude-depot` |
-| **continual-learning** | Cross-session memory via hooks | _(hooks only)_ | `/plugin install continual-learning@claude-depot` |
-| **obsidian** | Markdown, Bases, CLI, Web Clipper | [obsidian.skill][obsidian] | `/plugin install obsidian@claude-depot` |
-| **plan-to-vault** | Archive plans to Obsidian vault | [setup.skill][ptv-setup] / [import-plans.skill][ptv-import] | `/plugin install plan-to-vault@claude-depot` |
+### With .skill downloads (work in Claude.ai)
+
+| Plugin | Description | .skill Download |
+|---|---|---|
+| **trmm-expert** | Tactical RMM documentation expert | [trmm-expert.skill][trmm-expert] |
+| **claude-docs** | Anthropic docs search (573 paths) | [docs.skill][docs] |
+| **skill-creator-enhanced** | Skill creation guide with validators | [skill-creator-enhanced.skill][skill-creator] |
+| **rules-auditor** | Audit rules for staleness and quality | [rules-auditor.skill][rules-auditor] |
+| **obsidian** | Markdown, Bases, CLI, Web Clipper | [obsidian.skill][obsidian] |
 
 [trmm-expert]: https://github.com/seanGSISG/claude-depot/releases/download/latest/trmm-expert.skill
 [docs]: https://github.com/seanGSISG/claude-depot/releases/download/latest/docs.skill
 [skill-creator]: https://github.com/seanGSISG/claude-depot/releases/download/latest/skill-creator-enhanced.skill
 [rules-auditor]: https://github.com/seanGSISG/claude-depot/releases/download/latest/rules-auditor.skill
 [obsidian]: https://github.com/seanGSISG/claude-depot/releases/download/latest/obsidian.skill
-[ptv-setup]: https://github.com/seanGSISG/claude-depot/releases/download/latest/setup.skill
-[ptv-import]: https://github.com/seanGSISG/claude-depot/releases/download/latest/import-plans.skill
 
 <details>
 <summary><strong>mcp-toolkit</strong> — MCP Apps & MCPB builder (6 skills)</summary>
@@ -47,27 +45,17 @@ Download a `.skill` file from the table below, then upload via **Settings > Skil
 | build-mcpb | [build-mcpb.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/build-mcpb.skill) |
 | mcpb-manifest | [mcpb-manifest.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/mcpb-manifest.skill) |
 
-`/plugin install mcp-toolkit@claude-depot`
-
 </details>
 
-<details>
-<summary><strong>vault-tools</strong> — Obsidian vault management (8 skills)</summary>
+### Claude Code only (require hooks/scripts)
 
-| Skill | Download |
-|---|---|
-| new-note | [new-note.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/new-note.skill) |
-| vault-search | [vault-search.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/vault-search.skill) |
-| process-inbox | [process-inbox.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/process-inbox.skill) |
-| auto-categorize | [auto-categorize.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/auto-categorize.skill) |
-| vault-stats | [vault-stats.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/vault-stats.skill) |
-| vault-maintenance | [vault-maintenance.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/vault-maintenance.skill) |
-| reclassify | [reclassify.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/reclassify.skill) |
-| weekly-review | [weekly-review.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/weekly-review.skill) |
+These plugins use hooks and scripts that only work when installed via `/plugin install`:
 
-`/plugin install vault-tools@claude-depot`
-
-</details>
+| Plugin | Description | Install |
+|---|---|---|
+| **continual-learning** | Cross-session memory via hooks | `/plugin install continual-learning@claude-depot` |
+| **plan-to-vault** | Archive plans to Obsidian vault | `/plugin install plan-to-vault@claude-depot` |
+| **vault-tools** | Obsidian vault management (9 skills) | `/plugin install vault-tools@claude-depot` |
 
 ## Contributing
 

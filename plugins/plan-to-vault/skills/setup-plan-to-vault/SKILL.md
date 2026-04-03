@@ -1,5 +1,5 @@
 ---
-name: setup
+name: setup-plan-to-vault
 description: >-
   This skill should be used to configure the plan-to-vault plugin for first-time
   use, or when the vault path needs to be changed. Trigger phrases include
