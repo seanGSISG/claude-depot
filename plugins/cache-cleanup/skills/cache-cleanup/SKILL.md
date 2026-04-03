@@ -18,7 +18,7 @@ latest version of each plugin.
 
 1. **Scan (dry-run)**: Always run the script in dry-run mode first:
    ```bash
-   node "${CLAUDE_SKILL_DIR}/../scripts/cleanup.js" --dry-run
+   node "${CLAUDE_SKILL_DIR}/../../scripts/cleanup.js" --dry-run
    ```
 
 2. **Report**: Show the user the output — which old versions would be removed
@@ -30,7 +30,7 @@ latest version of each plugin.
 
 4. **Delete**: Only after the user confirms, run:
    ```bash
-   node "${CLAUDE_SKILL_DIR}/../scripts/cleanup.js" --delete
+   node "${CLAUDE_SKILL_DIR}/../../scripts/cleanup.js" --delete
    ```
 
 5. **Report results**: Show the user what was deleted and total space freed.
