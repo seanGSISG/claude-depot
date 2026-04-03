@@ -1,5 +1,5 @@
 ---
-name: setup
+name: setup-vault-tools
 description: >-
   Configure vault-tools for first-time use, or when the vault path needs
   to be changed. Trigger phrases include "setup vault-tools",

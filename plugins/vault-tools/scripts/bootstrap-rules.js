@@ -21,7 +21,7 @@ async function main() {
     const msg = {
       additionalContext:
         "[vault-tools] Vault path not configured. " +
-        "Run /vault-tools:setup to configure, or go to /plugin \u2192 vault-tools \u2192 Configure options.",
+        "Run /vault-tools:setup-vault-tools to configure, or go to /plugin \u2192 vault-tools \u2192 Configure options.",
     };
     process.stdout.write(JSON.stringify(msg));
     process.exit(0);

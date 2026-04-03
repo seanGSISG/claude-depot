@@ -8,7 +8,7 @@ Vault-specific skills, rules, and hooks for the MyVault Obsidian knowledge base.
 
 | Skill | Purpose |
 |-------|---------|
-| `/setup` | First-time configuration (set vault path) |
+| `/setup-vault-tools` | First-time configuration (set vault path) |
 | `/new-note` | Create a note with proper frontmatter |
 | `/vault-search` | Natural language search across vault |
 | `/process-inbox` | Classify Inbox/ files and move to Notes/ |

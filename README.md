@@ -187,7 +187,7 @@ Automatically archive Claude Code plan files to an Obsidian vault when exiting p
 Vault-specific skills, rules, and hooks for Obsidian knowledge bases — note creation, search, inbox processing, maintenance, and frontmatter validation.
 
 **What it provides:**
-- 9 skills: new-note, vault-search, process-inbox, auto-categorize, vault-stats, vault-maintenance, reclassify, weekly-review, setup
+- 9 skills: new-note, vault-search, process-inbox, auto-categorize, vault-stats, vault-maintenance, reclassify, weekly-review, setup-vault-tools
 - PostToolUse hook that validates YAML frontmatter on every write to `Notes/`
 - SessionStart hook that bootstraps `.claude/rules/` with archive protection and frontmatter requirements
 - All scripts are pure Node.js for cross-platform compatibility
