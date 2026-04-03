@@ -1,0 +1,10 @@
+{
+  "name": "cache-cleanup",
+  "description": "Clean up old cached plugin versions to free disk space",
+  "version": "1.0.0",
+  "author": {
+    "name": "seanGSISG",
+    "url": "https://github.com/seanGSISG"
+  },
+  "license": "MIT"
+}

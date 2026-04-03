@@ -69,6 +69,13 @@
       "description": "Vault-specific skills, rules, and hooks for Obsidian knowledge bases — note creation, search, inbox processing, maintenance, and frontmatter validation",
       "category": "productivity",
       "tags": ["obsidian", "vault", "notes", "frontmatter", "knowledge-base", "skills", "hooks"]
+    },
+    {
+      "name": "cache-cleanup",
+      "source": "./plugins/cache-cleanup",
+      "description": "Clean up old cached plugin versions to free disk space",
+      "category": "development",
+      "tags": ["cache", "cleanup", "maintenance", "plugins", "disk-space"]
     }
   ]
 }
