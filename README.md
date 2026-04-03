@@ -2,210 +2,76 @@
 
 A curated depot of Claude Code plugins — skills, tools, and extensions.
 
-## Installation
+## Install
 
-### Via Claude Code Plugin Marketplace
-
-Add the marketplace, then install any plugin:
+### Claude Code (recommended)
 
 ```
 /plugin marketplace add seanGSISG/claude-depot
-/plugin install trmm-expert@claude-depot
+/plugin install <plugin-name>@claude-depot
 ```
 
-### Direct Download (.skill files)
+### Claude.ai / Claude Desktop
 
-For use in **Claude.ai** or **Claude Desktop**, download pre-built `.skill` files from [GitHub Releases](https://github.com/seanGSISG/claude-depot/releases):
+Download a `.skill` file from the table below, then upload via **Settings > Skills**.
 
-1. Go to the [latest release](https://github.com/seanGSISG/claude-depot/releases/latest)
-2. Download the `.skill` file for the plugin you want
-3. Upload it to Claude.ai (Settings > Skills) or Claude Desktop
+## Plugins
 
-`.skill` files are validated ZIP archives containing the skill and all its reference files. They work identically to plugin-installed skills.
+| Plugin | Description | .skill Download | Install |
+|---|---|---|---|
+| **trmm-expert** | Tactical RMM documentation expert | [trmm-expert.skill][trmm-expert] | `/plugin install trmm-expert@claude-depot` |
+| **claude-docs** | Anthropic docs search (573 paths) | [docs.skill][docs] | `/plugin install claude-docs@claude-depot` |
+| **skill-creator-enhanced** | Skill creation guide with validators | [skill-creator-enhanced.skill][skill-creator] | `/plugin install skill-creator-enhanced@claude-depot` |
+| **rules-auditor** | Audit rules for staleness and quality | [rules-auditor.skill][rules-auditor] | `/plugin install rules-auditor@claude-depot` |
+| **continual-learning** | Cross-session memory via hooks | _(hooks only)_ | `/plugin install continual-learning@claude-depot` |
+| **obsidian** | Markdown, Bases, CLI, Web Clipper | [obsidian.skill][obsidian] | `/plugin install obsidian@claude-depot` |
+| **plan-to-vault** | Archive plans to Obsidian vault | [setup.skill][ptv-setup] / [import-plans.skill][ptv-import] | `/plugin install plan-to-vault@claude-depot` |
 
-## Available Plugins
+[trmm-expert]: https://github.com/seanGSISG/claude-depot/releases/download/latest/trmm-expert.skill
+[docs]: https://github.com/seanGSISG/claude-depot/releases/download/latest/docs.skill
+[skill-creator]: https://github.com/seanGSISG/claude-depot/releases/download/latest/skill-creator-enhanced.skill
+[rules-auditor]: https://github.com/seanGSISG/claude-depot/releases/download/latest/rules-auditor.skill
+[obsidian]: https://github.com/seanGSISG/claude-depot/releases/download/latest/obsidian.skill
+[ptv-setup]: https://github.com/seanGSISG/claude-depot/releases/download/latest/setup.skill
+[ptv-import]: https://github.com/seanGSISG/claude-depot/releases/download/latest/import-plans.skill
 
-### trmm-expert
+<details>
+<summary><strong>mcp-toolkit</strong> — MCP Apps & MCPB builder (6 skills)</summary>
 
-Tactical RMM documentation expert — answers questions about architecture, agents, scripting, checks/tasks, alerting, API, settings, reporting, SSO, integrations, and troubleshooting.
+| Skill | Download |
+|---|---|
+| create-mcp-app | [create-mcp-app.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/create-mcp-app.skill) |
+| add-app-to-server | [add-app-to-server.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/add-app-to-server.skill) |
+| convert-web-app | [convert-web-app.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/convert-web-app.skill) |
+| migrate-oai-app | [migrate-oai-app.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/migrate-oai-app.skill) |
+| build-mcpb | [build-mcpb.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/build-mcpb.skill) |
+| mcpb-manifest | [mcpb-manifest.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/mcpb-manifest.skill) |
 
-**What it provides:**
-- Expert-level answers from the complete TRMM documentation (46 source files)
-- 9 consolidated reference files organized by topic domain
-- Intelligent routing that loads only the relevant reference(s) per question
-- Quick-reference syntax guide for script variables, custom fields, data queries
+`/plugin install mcp-toolkit@claude-depot`
 
-**Triggers when you ask about:**
-- TRMM architecture, installation, agent deployment
-- Scripting (PowerShell/Python/Bash/Deno), script variables, custom fields
-- Checks, tasks, automation policies, alerting, webhooks
-- REST API, global settings, permissions, management commands
-- Reporting and SSO (Enterprise Edition)
-- Third-party integrations (Bitdefender, Zammad), SNMP, troubleshooting
+</details>
 
-### claude-docs
+<details>
+<summary><strong>vault-tools</strong> — Obsidian vault management (8 skills)</summary>
 
-AI-powered search and access to 573 Anthropic documentation paths — Claude Code CLI, API, Agent SDK, prompt library, and more.
+| Skill | Download |
+|---|---|
+| new-note | [new-note.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/new-note.skill) |
+| vault-search | [vault-search.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/vault-search.skill) |
+| process-inbox | [process-inbox.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/process-inbox.skill) |
+| auto-categorize | [auto-categorize.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/auto-categorize.skill) |
+| vault-stats | [vault-stats.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/vault-stats.skill) |
+| vault-maintenance | [vault-maintenance.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/vault-maintenance.skill) |
+| reclassify | [reclassify.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/reclassify.skill) |
+| weekly-review | [weekly-review.skill](https://github.com/seanGSISG/claude-depot/releases/download/latest/weekly-review.skill) |
 
-**What it provides:**
-- Full-text content search and fuzzy path search across 571 locally mirrored documentation files
-- Automatic sync via SessionStart hook (clones/pulls from seanGSISG/claude-code-docs)
-- Category-aware results with product context (Claude Code CLI, Claude API, Agent SDK, etc.)
-- Graceful degradation — works with or without Python 3.9+
+`/plugin install vault-tools@claude-depot`
 
-**Triggers when you ask about:**
-- Claude Code CLI features (hooks, skills, MCP, memory, plugins, settings)
-- Claude API (messages, batches, files, models, admin, multi-language SDKs)
-- Agent SDK (Python/TypeScript, sessions, subagents, custom tools)
-- Prompt engineering, tool use, streaming, extended thinking, vision
-- Any Anthropic platform documentation
-
-```
-/plugin install claude-docs@claude-depot
-```
-
-### skill-creator-enhanced
-
-Guide for creating effective Claude Code skills with templates, validators, and packaging tools.
-
-**What it provides:**
-- 6-step skill creation workflow (understand > plan > init > edit > package > iterate)
-- Python scripts for initializing, validating, and packaging skills
-- Reference docs on workflow patterns and output patterns
-- Progressive disclosure design principles
-
-**Triggers when you:**
-- Ask to create a new skill
-- Want to update or improve an existing skill
-- Need help structuring a skill's resources
-
-### rules-auditor
-
-Audit Claude Code rules and CLAUDE.md files for staleness, quality, and drift against the actual codebase.
-
-**What it provides:**
-- Expert knowledge on rules quality, anti-patterns, and progressive disclosure best practices
-- Automated discovery and audit of all `.claude/rules/*.md` and `CLAUDE.md` files
-- Staleness detection: dead globs, broken file references, outdated conventions, convention drift
-- Freshness scoring (fresh / needs-review / stale) with actionable recommendations
-- `/install-rules-audit` command to set up GitHub Actions CI integration
-- Standalone workflow that audits affected rules on every PR using `claude-code-action`
-
-**Triggers when you ask to:**
-- Audit or review rules quality and freshness
-- Find stale or broken rules
-- Improve progressive disclosure setup
-- Check if CLAUDE.md files are up to date
-- Install rules audit CI workflow
-
-```
-/plugin install rules-auditor@claude-depot
-```
-
-### continual-learning
-
-Hooks that enable Claude Code to learn, reflect, and persist knowledge across sessions.
-
-**What it provides:**
-- Automatic loading of prior learnings at session start (injected into Claude's context)
-- Silent tool usage tracking during sessions (success and failure patterns)
-- End-of-session reflection that detects repeated failure patterns and stores insights
-- Two-tier memory: global (`~/.claude/learnings.db`) cross-project, local (`.claude-memory/learnings.db`) per-repo
-- Automatic decay of stale, low-value learnings (60-day TTL)
-
-**Requirements:** `sqlite3` (pre-installed on macOS/Linux), `jq` (optional)
-
-```
-/plugin install continual-learning@claude-depot
-```
-
-### mcp-toolkit
-
-Claude Code skills for building MCP Apps with interactive UIs and packaging MCP servers as MCPB desktop extensions.
-
-**What it provides:**
-- 6 skills covering the full MCP Apps and MCPB workflow
-- Guidance for creating new MCP servers with interactive UIs (React, Vue, Svelte, Vanilla JS)
-- Enriching existing MCP server tools with UI resources
-- Converting standalone web apps into hybrid MCP Apps
-- Migrating from OpenAI Apps SDK to MCP Apps SDK
-- Packaging MCP servers as `.mcpb` bundles for single-click Claude Desktop installation
-- Complete `manifest.json` reference for MCPB configuration
-
-**Triggers when you ask about:**
-- Creating MCP Apps, adding UI to MCP tools, building interactive MCP Views
-- Adding apps to existing MCP servers, enriching tools with UIs
-- Converting web apps to MCP Apps, hybrid web + MCP patterns
-- Migrating from OpenAI Apps SDK
-- Building and packaging MCPB bundles
-- MCPB manifest configuration, user_config schema, variable substitution
-
-```
-/plugin install mcp-toolkit@claude-depot
-```
-
-### obsidian
-
-Comprehensive Obsidian skill covering four domains: Markdown (wikilinks, callouts, embeds, properties), Bases (.base files with formulas, filters, views), CLI (vault management, plugin dev), and Web Clipper (JSON templates, AI Interpreter prompts).
-
-**What it provides:**
-- Expert-level answers across all four Obsidian domains with curated official docs
-- Reference files for callouts, embeds, properties, base functions, clipper variables/filters/logic/JSON schema
-- Intelligent routing that loads only the relevant reference(s) per question
-- Official documentation index for edge cases beyond the skill's core content
-
-**Triggers when you ask about:**
-- Obsidian vault structure, notes, daily notes, wikilinks, callouts, embeds, frontmatter/properties
-- Bases (.base files): formulas, filters, views, YAML quoting, functions
-- Obsidian CLI, plugin development, hot-reload, headless mode, URI scheme
-- Web Clipper: JSON templates, variables, filters, logic, AI Interpreter prompts
-- Obsidian-specific problems (e.g., .base YAML errors, callout syntax, clipper templates)
-
-```
-/plugin install obsidian@claude-depot
-```
-
-### plan-to-vault
-
-Automatically archive Claude Code plan files to an Obsidian vault when exiting plan mode, with multi-machine origin tracking.
-
-**What it provides:**
-- PostToolUse hook that fires on ExitPlanMode and copies the plan to your vault's `Notes/` directory
-- Frontmatter wrapping with `type: plan`, origin hostname, session ID, and creation date
-- Bulk import skill for migrating existing plans from `~/.claude/plans/`
-- Setup skill for first-time vault path configuration
-
-**Triggers automatically when:**
-- You exit plan mode (ExitPlanMode) — the plan is archived to your vault
-
-```
-/plugin install plan-to-vault@claude-depot
-```
-
-### vault-tools
-
-Vault-specific skills, rules, and hooks for Obsidian knowledge bases — note creation, search, inbox processing, maintenance, and frontmatter validation.
-
-**What it provides:**
-- 9 skills: new-note, vault-search, process-inbox, auto-categorize, vault-stats, vault-maintenance, reclassify, weekly-review, setup-vault-tools
-- PostToolUse hook that validates YAML frontmatter on every write to `Notes/`
-- SessionStart hook that bootstraps `.claude/rules/` with archive protection and frontmatter requirements
-- All scripts are pure Node.js for cross-platform compatibility
-
-**Triggers when you ask about:**
-- Creating, searching, or managing vault notes
-- Processing inbox files, categorizing content
-- Vault statistics, maintenance, or weekly reviews
-
-```
-/plugin install vault-tools@claude-depot
-```
+</details>
 
 ## Contributing
 
-To add a new plugin, create a subdirectory under `plugins/` with a `.claude-plugin/plugin.json` manifest and add an entry to the root `marketplace.json`.
-
-See `CLAUDE.md` for development conventions and the release workflow.
+Add plugins under `plugins/`, validate with `quick_validate.py`. See `CLAUDE.md` for conventions.
 
 ## License
 

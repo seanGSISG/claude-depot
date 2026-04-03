@@ -25,6 +25,8 @@ ALLOWED_FIELDS = {
     "description",
     "license",
     "allowed-tools",
+    "argument-hint",
+    "disable-model-invocation",
     "metadata",
     "compatibility",
 }

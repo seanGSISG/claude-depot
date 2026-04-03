@@ -2,14 +2,18 @@ name: Build and Release Skills
 
 on:
   push:
+    branches: [main]
+    paths: ['plugins/**']
     tags:
-      - 'v*'           # e.g. v1.0.0 — builds all skills
-      - '*-v*'         # e.g. trmm-expert-v1.0.0 — builds only that skill
+      - 'v*'
+      - '*-v*'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
+  # Always runs: validate and package all skills
   build-skills:
     runs-on: ubuntu-latest
     steps:
@@ -22,66 +26,14 @@ jobs:
       - name: Install dependencies
         run: pip install pyyaml
 
-      - name: Determine which plugins to build
-        id: scope
-        run: |
-          TAG="${GITHUB_REF_NAME}"
-          if [[ "$TAG" == v* ]]; then
-            echo "mode=all" >> "$GITHUB_OUTPUT"
-          else
-            PLUGIN_NAME="${TAG%-v*}"
-            echo "mode=single" >> "$GITHUB_OUTPUT"
-            echo "plugin_name=${PLUGIN_NAME}" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Verify tag-to-plugin.json version consistency
-        run: |
-          TAG="${GITHUB_REF_NAME}"
-          MODE="${{ steps.scope.outputs.mode }}"
-          PLUGIN_NAME="${{ steps.scope.outputs.plugin_name }}"
-          ERRORS=0
-
-          if [[ "$MODE" == "single" ]]; then
-            # Single plugin tag: trmm-expert-v1.2.0 → version 1.2.0
-            TAG_VERSION="${TAG##*-v}"
-            PLUGIN_JSON="plugins/${PLUGIN_NAME}/.claude-plugin/plugin.json"
-            if [ -f "$PLUGIN_JSON" ]; then
-              JSON_VERSION=$(python -c "import json; print(json.load(open('$PLUGIN_JSON'))['version'])")
-              if [[ "$TAG_VERSION" != "$JSON_VERSION" ]]; then
-                echo "::error::Tag version ($TAG_VERSION) does not match $PLUGIN_JSON version ($JSON_VERSION)"
-                echo "  Run: ./scripts/bump-version.sh $PLUGIN_NAME $TAG_VERSION"
-                ERRORS=1
-              else
-                echo "Version match: $PLUGIN_NAME $JSON_VERSION"
-              fi
-            else
-              echo "::error::Plugin not found: $PLUGIN_JSON"
-              ERRORS=1
-            fi
-          fi
-
-          if [[ "$ERRORS" -ne 0 ]]; then
-            exit 1
-          fi
-
-      - name: Build .skill files
+      - name: Validate and package all skills
         run: |
           mkdir -p dist
           VALIDATE="plugins/skill-creator-enhanced/scripts/quick_validate.py"
-          TAG="${GITHUB_REF_NAME}"
-          MODE="${{ steps.scope.outputs.mode }}"
-          PLUGIN_NAME="${{ steps.scope.outputs.plugin_name }}"
           BUILT=0
 
           for skill_dir in plugins/*/skills/*/; do
             skill_name=$(basename "$skill_dir")
-            # Extract the plugin directory name (2nd path component)
-            plugin_dir_name=$(echo "$skill_dir" | cut -d'/' -f2)
-
-            # Skip if single-plugin mode and this isn't the target plugin
-            if [[ "$MODE" == "single" && "$plugin_dir_name" != "$PLUGIN_NAME" ]]; then
-              continue
-            fi
 
             if [ ! -f "$skill_dir/SKILL.md" ]; then
               echo "::warning::Skipping $skill_name — no SKILL.md"
@@ -102,12 +54,91 @@ jobs:
           done
 
           if [[ "$BUILT" -eq 0 ]]; then
-            echo "::error::No skills were built — check that plugins/${PLUGIN_NAME}/skills/*/SKILL.md exists"
+            echo "::error::No skills were built"
             exit 1
           fi
           echo "Built $BUILT skill(s)"
 
-      - name: Create GitHub Release
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-files
+          path: dist/*.skill
+
+  # Runs on every push to main (and workflow_dispatch): update rolling "latest" release
+  publish-latest:
+    needs: build-skills
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: skill-files
+          path: dist
+
+      - name: Force-update latest tag
+        run: |
+          git tag -f latest
+          git push origin latest --force
+
+      - name: Update latest release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: "Latest Skills"
+          body: |
+            Always up-to-date `.skill` files built from `main`.
+
+            Download any `.skill` file and upload it to **Claude.ai** (Settings > Skills) or **Claude Desktop**.
+
+            _Last updated: ${{ github.event.head_commit.timestamp || github.event.repository.updated_at }}_
+          files: dist/*.skill
+          fail_on_unmatched_files: true
+          make_latest: false
+
+  # Runs on version tags only: create versioned release with version verification
+  publish-versioned:
+    needs: build-skills
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Verify tag-to-plugin.json version consistency
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          # Only verify for single-plugin tags (e.g. trmm-expert-v1.0.0)
+          if [[ "$TAG" != v* ]]; then
+            PLUGIN_NAME="${TAG%-v*}"
+            TAG_VERSION="${TAG##*-v}"
+            PLUGIN_JSON="plugins/${PLUGIN_NAME}/.claude-plugin/plugin.json"
+            if [ -f "$PLUGIN_JSON" ]; then
+              JSON_VERSION=$(python -c "import json; print(json.load(open('$PLUGIN_JSON'))['version'])")
+              if [[ "$TAG_VERSION" != "$JSON_VERSION" ]]; then
+                echo "::error::Tag version ($TAG_VERSION) does not match $PLUGIN_JSON version ($JSON_VERSION)"
+                exit 1
+              fi
+              echo "Version match: $PLUGIN_NAME $JSON_VERSION"
+            else
+              echo "::error::Plugin not found: $PLUGIN_JSON"
+              exit 1
+            fi
+          fi
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: skill-files
+          path: dist
+
+      - name: Create versioned release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*.skill

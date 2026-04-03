@@ -6,7 +6,7 @@ Claude Code plugin marketplace. Repo: `seanGSISG/claude-depot`.
 
 ```
 .claude-plugin/marketplace.json   # Marketplace registry — lists all plugins
-.github/workflows/release-skills.yml  # CI: builds .skill files on tagged releases
+.github/workflows/release-skills.yml  # CI: builds .skill files on push to main + tagged releases
 plugins/
   <plugin-name>/
     .claude-plugin/plugin.json    # Plugin manifest (name, description, version, author)
@@ -54,9 +54,9 @@ There are two distribution channels, each keyed off a different version source:
 | Channel | Version Source | Who Consumes It |
 |---|---|---|
 | **Plugin marketplace** (`/plugin install`) | `version` in `plugins/<name>/.claude-plugin/plugin.json` | Claude Code users |
-| **GitHub Releases** (`.skill` downloads) | Git tag (e.g., `trmm-expert-v1.1.0`) | Claude.ai / Claude Desktop users |
+| **GitHub Releases** (`.skill` downloads) | Auto-built on push to `main`; versioned via git tags | Claude.ai / Claude Desktop users |
 
-**These must stay in sync.** If you change plugin code but don't bump `plugin.json` version, marketplace users won't see the update (Claude Code caches by version string). If you bump `plugin.json` but forget the tag, `.skill` downloads won't be built.
+**Marketplace versions must be bumped.** If you change plugin code but don't bump `plugin.json` version, marketplace users won't see the update (Claude Code caches by version string). `.skill` files are automatically rebuilt on every push to `main`.
 
 ### Releasing a Plugin Update
 
@@ -92,20 +92,21 @@ The CI workflow will:
 
 ### What Happens When You Forget
 
-- **Changed code, didn't bump version:** Marketplace users stay on the old cached version. Fix: bump version and re-release.
-- **Bumped plugin.json, didn't tag:** No `.skill` file built. Marketplace users get the update, but Claude.ai/Desktop users don't. Fix: create the tag.
-- **Tag version doesn't match plugin.json:** CI fails the build and tells you what to fix.
+- **Changed code, didn't bump version:** Marketplace users stay on the old cached version. `.skill` files are still updated automatically.
+- **Tag version doesn't match plugin.json:** CI fails the versioned release build and tells you what to fix.
 
 ## Release Workflow
 
-The GitHub Actions workflow at `.github/workflows/release-skills.yml` automates building and releasing `.skill` files.
+The GitHub Actions workflow at `.github/workflows/release-skills.yml` has two modes:
 
-**Steps:**
-1. Verifies tag version matches `plugin.json` version (for single-plugin tags)
-2. Discovers all skills under `plugins/*/skills/*/`
-3. Runs `quick_validate.py` on each — fails the build if any skill is invalid
-4. Packages each into a `.skill` ZIP with correct directory structure
-5. Attaches `.skill` files to a GitHub Release with auto-generated notes
+### Rolling release (automatic)
+On every push to `main` that changes `plugins/**`, the workflow validates and packages all skills, then updates a rolling `latest` GitHub Release. This keeps `.skill` download links always current:
+```
+https://github.com/seanGSISG/claude-depot/releases/download/latest/<skill-name>.skill
+```
+
+### Versioned release (manual)
+Pushing a git tag (`v*` or `*-v*`) creates an immutable versioned release. For single-plugin tags, the workflow verifies the tag version matches `plugin.json`.
 
 ## Commits
 
