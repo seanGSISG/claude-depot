@@ -62,6 +62,13 @@
       "description": "Automatically archive Claude Code plan files to an Obsidian vault when exiting plan mode, with multi-machine origin tracking",
       "category": "development",
       "tags": ["obsidian", "plans", "vault", "planning", "sync", "hooks", "archive"]
+    },
+    {
+      "name": "vault-tools",
+      "source": "./plugins/vault-tools",
+      "description": "Vault-specific skills, rules, and hooks for Obsidian knowledge bases — note creation, search, inbox processing, maintenance, and frontmatter validation",
+      "category": "productivity",
+      "tags": ["obsidian", "vault", "notes", "frontmatter", "knowledge-base", "skills", "hooks"]
     }
   ]
 }
