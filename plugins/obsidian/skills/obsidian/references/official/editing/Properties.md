@@ -15,6 +15,36 @@ publish: true
 
 Properties allow you to organize information about a note. Properties contain structured data such as text, links, dates, checkboxes, and numbers. Properties can also be used in combination with [[Community plugins]] that can do useful things with your structured data.
 
+## Table of Contents
+
+- [Add properties to a note](#add-properties-to-a-note)
+  - [Property types](#property-types)
+- [Advanced uses](#advanced-uses)
+  - [Search properties](#search-properties)
+  - [Templates](#templates)
+  - [Rename properties](#rename-properties)
+  - [Display modes](#display-modes)
+  - [CSS snippets](#css-snippets)
+  - [Not supported](#not-supported)
+- [Hotkeys](#hotkeys)
+  - [Add a property](#add-a-property)
+  - [Navigate between properties](#navigate-between-properties)
+  - [Select properties](#select-properties)
+  - [Edit properties](#edit-properties)
+  - [Vim (advanced)](#vim-advanced)
+- [Property format](#property-format)
+  - [Text](#text)
+  - [List](#list)
+  - [Number](#number)
+  - [Checkbox](#checkbox)
+  - [Date](#date)
+  - [Date & time](#date-time)
+  - [Tags](#tags)
+  - [JSON properties](#json-properties)
+- [Default properties](#default-properties)
+  - [Properties for Obsidian Publish](#properties-for-obsidian-publish)
+  - [Deprecated properties](#deprecated-properties)
+
 ## Add properties to a note
 
 There are several ways to add a property to a note:
@@ -215,17 +245,11 @@ The date picker follows your operating system's default date and time format. Yo
 
 > [!info]- Windows
 > **[[Settings]] → Time & Language → Language & Region → Regional Format → Change Formats**
-> 
-> ![[Windows-OS-DateTime.png#interface]]
 
 > [!info]- Mac OS
 > **System Preferences → Language and Region → Date format**
-> 
-> ![[Mac-OS-DateTime.png|450]]
 
 With the [[Daily notes]] plugin enabled, the date property will additionally function as an internal link to the corresponding daily note for that date.
-
-![[Daily notes#^daily-notes-date]]
 
 ### Date & time
 
@@ -304,3 +328,5 @@ These properties were deprecated in Obsidian 1.4 and should be replaced with the
 | `cssclass` | Deprecated alias for `cssclasses`. |
 
 > [!tip] If you need to convert your files in your vault to the [[#Default properties]] format, you can use [[Format converter]] to change your vault en masse.
+
+> Sources: https://help.obsidian.md/editing-and-formatting/Properties

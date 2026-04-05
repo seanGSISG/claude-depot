@@ -5,6 +5,12 @@ permalink: advanced-syntax
 ---
 Learn how to add advanced formatting syntax to your notes.
 
+## Table of Contents
+
+- [Tables](#tables)
+- [Diagram](#diagram)
+- [Math](#math)
+
 ## Tables
 
 You can create tables using vertical bars (`|`) to separate columns and hyphens (`-`) to define headers. Here's an example:
@@ -202,3 +208,5 @@ This is an inline math expression $e^{2i\pi} = 1$.
 For more information about the syntax, refer to [MathJax basic tutorial and quick reference](https://math.meta.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference).
 
 For a list of supported MathJax packages, refer to [The TeX/LaTeX Extension List](http://docs.mathjax.org/en/latest/input/tex/extensions/index.html).
+
+> Sources: https://help.obsidian.md/editing-and-formatting/Advanced+formatting+syntax

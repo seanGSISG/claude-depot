@@ -11,6 +11,30 @@ When you [[Create a base|create a base]] in Obsidian, it is saved asÂ a `.base`Â
 
 The [[Introduction to Bases|Bases]] syntax defines [[Views]], filters, and [[formulas]]. Bases must be valid YAML conforming to the schema defined below.
 
+## Table of Contents
+
+- [Example](#example)
+  - [Filters](#filters)
+  - [Formulas](#formulas)
+  - [Properties](#properties)
+  - [Summaries](#summaries)
+  - [Views](#views)
+- [Properties](#properties)
+  - [Note properties](#note-properties)
+  - [File properties](#file-properties)
+  - [Access properties with `this`](#access-properties-with-this)
+- [Operators](#operators)
+  - [Arithmetic operators](#arithmetic-operators)
+  - [Date arithmetic](#date-arithmetic)
+  - [Comparison operators](#comparison-operators)
+  - [Boolean operators](#boolean-operators)
+- [Functions](#functions)
+- [Types](#types)
+  - [Strings, numbers, and booleans](#strings-numbers-and-booleans)
+  - [Dates and durations](#dates-and-durations)
+  - [Objects and lists](#objects-and-lists)
+  - [Files and links](#files-and-links)
+
 ## Example
 
 Here's an example of a base file. We'll walk through each section in detail.
@@ -358,3 +382,5 @@ Links can be compared with `==` and `!=`. They are equivalent as long as they po
 Links can be compared to files such as `file` or `this`. They will equate if the link resolves to the file. For example, `author == this`.
 
 Links can also be checked in list contains, for example, `authors.contains(this)`.
+
+> Sources: https://help.obsidian.md/bases/Bases+syntax

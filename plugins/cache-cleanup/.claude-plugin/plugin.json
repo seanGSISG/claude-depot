@@ -1,10 +1,19 @@
 {
   "name": "cache-cleanup",
   "description": "Clean up old cached plugin versions to free disk space",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": {
     "name": "seanGSISG",
     "url": "https://github.com/seanGSISG"
   },
-  "license": "MIT"
+  "homepage": "https://github.com/seanGSISG/claude-depot",
+  "repository": "https://github.com/seanGSISG/claude-depot",
+  "license": "MIT",
+  "keywords": [
+    "cache",
+    "cleanup",
+    "maintenance",
+    "plugins",
+    "disk-space"
+  ]
 }

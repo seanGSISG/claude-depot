@@ -77,3 +77,5 @@ To allow Obsidian to always receive Web Clipper content:
 
 1. Go to iOS **[[Settings]]** →  **Apps** →  **Obsidian**.
 2. Set **Paste from other apps** to **Allow**.
+
+> Sources: https://help.obsidian.md/web-clipper/Troubleshoot+Web+Clipper

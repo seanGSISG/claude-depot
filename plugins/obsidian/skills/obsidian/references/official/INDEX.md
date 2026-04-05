@@ -53,3 +53,5 @@ Curated subset of official Obsidian documentation from help.obsidian.md. Read th
 | [web-clipper/Clip web pages.md](web-clipper/Clip%20web%20pages.md) | How clipping works end-to-end |
 | [web-clipper/Interpret web pages.md](web-clipper/Interpret%20web%20pages.md) | AI Interpreter for content extraction |
 | [web-clipper/Troubleshoot Web Clipper.md](web-clipper/Troubleshoot%20Web%20Clipper.md) | Common issues and fixes |
+
+> Sources: https://help.obsidian.md/

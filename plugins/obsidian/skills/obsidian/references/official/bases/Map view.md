@@ -3,9 +3,15 @@ permalink: bases/views/map
 ---
 Map is a type of [[Views|view]] you can use in [[Introduction to Bases|Bases]]. It requires installing the [Maps plugin](obsidian://show-plugin?id=maps).
 
-Select ![[lucide-map.svg#icon]]  **Map** from the view menu to display files as an interactive map with markers for each file, and a preview that displays properties of that file.
+Select **Map** from the view menu to display files as an interactive map with markers for each file, and a preview that displays properties of that file.
 
-![[bases-map-places.png#interface]]
+## Table of Contents
+
+- [Install the Maps plugin](#install-the-maps-plugin)
+- [Example](#example)
+- [Settings](#settings)
+- [Tips](#tips)
+- [Troubleshooting](#troubleshooting)
 
 ## Install the Maps plugin
 
@@ -125,3 +131,5 @@ link("https://www.google.com/maps/search/" + file.name.replace(" ","+"),"Google 
 If the map appears blank when you first load the Maps plugin, try [[Update Obsidian|updating the Obsidian installer version]].
 
 The [Maps plugin](https://github.com/obsidianmd/obsidian-maps) is open source. You can help by contributing bug reports, feature requests and pull requests.
+
+> Sources: https://help.obsidian.md/bases/Map+view

@@ -1,7 +1,7 @@
 {
   "name": "vault-tools",
   "description": "Vault-specific skills, rules, and hooks for the MyVault Obsidian knowledge base. Provides note creation, search, inbox processing, maintenance, and frontmatter validation.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": {
     "name": "seanGSISG",
     "url": "https://github.com/seanGSISG"

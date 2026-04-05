@@ -3,7 +3,7 @@ permalink: bases/views/cards
 ---
 Cards is a type of [[Views|view]] you can use in [[Introduction to Bases|Bases]].
 
-Select ![[lucide-layout-grid.svg#icon]]  **Cards** from the view menu to display files as a gallery-like grid layout with optional cover images.
+Select **Cards** from the view menu to display files as a gallery-like grid layout with optional cover images.
 
 ## Settings
 
@@ -36,3 +36,5 @@ If you have an image property configured, this option will determine how the ima
 ### Image aspect ratio
 
 The height of the cover image is determined by its aspect ratio. The default aspect ratio is 1:1 meaning all your images will be square. Adjust this option to make the image shorter or taller.
+
+> Sources: https://help.obsidian.md/bases/Cards+view

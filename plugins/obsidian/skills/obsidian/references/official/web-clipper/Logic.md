@@ -8,6 +8,15 @@ description: Use conditionals, loops, and variable assignment in Web Clipper tem
 > [!warning] Requires the latest version
 > Logic features require Obsidian Web Clipper 1.0.0 which has not been approved on all extension stores yet.
 
+## Table of Contents
+
+- [Conditionals](#conditionals)
+- [Assign a variable](#assign-a-variable)
+- [Fallbacks](#fallbacks)
+- [Loops](#loops)
+- [Combine logic](#combine-logic)
+- [Evaluation order](#evaluation-order)
+
 ## Conditionals
 
 Use `{% if %}` to conditionally include content based on variables or expressions.
@@ -243,3 +252,5 @@ Template logic is processed in the following order:
 2. **Prompt variables** — [[Variables#Prompt variables|Prompt variables]] like `{{"summarize this"|prompt}}` are sent to the Interpreter after template logic is complete
 
 This means you can use template logic to construct prompts dynamically, but prompt results are not available for use in conditionals or loops.
+
+> Sources: https://help.obsidian.md/web-clipper/Logic

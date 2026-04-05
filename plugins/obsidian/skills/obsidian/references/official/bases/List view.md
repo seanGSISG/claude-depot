@@ -3,7 +3,7 @@ permalink: bases/views/list
 ---
 List is a type of [[Views|view]] you can use in [[Introduction to Bases|Bases]].
 
-Select ![[lucide-list.svg#icon]]  **List** from the view menu to display files as a [[Basic formatting syntax#Lists|list]] with bulleted or numbered markers.
+Select **List** from the view menu to display files as a [[Basic formatting syntax#Lists|list]] with bulleted or numbered markers.
 
 ## Settings
 
@@ -26,3 +26,5 @@ To change your primary list item, move a property in the **Properties** menu to 
 ### Separators
 
 When **nested properties** is toggled off, this setting defines a character to separate the properties for each list item. Defaults to a comma.
+
+> Sources: https://help.obsidian.md/bases/List+view

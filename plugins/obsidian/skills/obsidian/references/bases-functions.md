@@ -1,5 +1,21 @@
 # Functions Reference
 
+## Table of Contents
+
+- [Global Functions](#global-functions)
+- [Any Type Functions](#any-type-functions)
+- [Date Functions & Fields](#date-functions-fields)
+- [Duration Type](#duration-type)
+- [Date Arithmetic](#date-arithmetic)
+- [String Functions](#string-functions)
+- [Number Functions](#number-functions)
+- [List Functions](#list-functions)
+- [File Functions](#file-functions)
+- [Link Functions](#link-functions)
+- [Object Functions](#object-functions)
+- [Regular Expression Functions](#regular-expression-functions)
+
+
 ## Global Functions
 
 | Function | Signature | Description |
@@ -171,3 +187,5 @@ When subtracting two dates, the result is a **Duration** type (not a number). Du
 | Function | Signature | Description |
 |----------|-----------|-------------|
 | `matches()` | `regexp.matches(string): boolean` | Test if matches |
+
+> Sources: Synthesized from https://help.obsidian.md/bases/Functions

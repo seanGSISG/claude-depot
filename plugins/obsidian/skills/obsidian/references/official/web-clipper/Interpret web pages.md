@@ -12,7 +12,13 @@ Interpreter is a [[Introduction to Obsidian Web Clipper|Web Clipper]] feature th
 
 Interpreter leverages language models to process information on a web page, and return results using [[Variables]] that you can add to your [[Obsidian Web Clipper/Templates|Web Clipper Templates]].
 
-![[web-clipper-interpreter-demo.mp4#interface]]
+## Table of Contents
+
+- [Examples of prompts](#examples-of-prompts)
+- [Get started](#get-started)
+- [How it works](#how-it-works)
+- [Context](#context)
+- [Models](#models)
 
 ## Examples of prompts
 
@@ -130,3 +136,5 @@ Ollama's context window defaults to 2048 tokens. This is the maximum number of t
 
 - Increase Ollama's `num_ctx` parameter. Be mindful that longer context requires more memory.
 - Use the [[#Context]] field in your template to provide a more targeted section of the page, or trim the context using a [[Filters|filter]] e.g. `{{content|slice:0,1000}}`.
+
+> Sources: https://help.obsidian.md/web-clipper/Interpret+web+pages

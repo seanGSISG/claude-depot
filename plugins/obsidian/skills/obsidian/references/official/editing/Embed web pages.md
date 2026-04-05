@@ -38,3 +38,5 @@ To embed a tweet, use the same Markdown syntax as [[Basic formatting syntax#Exte
 ```
 
 ![](https://twitter.com/obsdmd/status/1580548874246443010)
+
+> Sources: https://help.obsidian.md/editing-and-formatting/Embed+web+pages

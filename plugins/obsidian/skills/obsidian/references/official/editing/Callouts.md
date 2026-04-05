@@ -29,6 +29,13 @@ To wrap existing content in a callout, select the text (including lists, code bl
 
 In [[Views and editing mode#Live Preview|Live Preview]], you can also right-click the callout name to change the callout type.
 
+## Table of Contents
+
+- [Change the title](#change-the-title)
+- [Foldable callouts](#foldable-callouts)
+- [Nested callouts](#nested-callouts)
+- [Customize callouts](#customize-callouts)
+- [Supported types](#supported-types)
 
 ### Change the title
 
@@ -232,3 +239,5 @@ Alias: `error`
 > ```
 
 Alias: `cite`
+
+> Sources: https://help.obsidian.md/editing-and-formatting/Callouts

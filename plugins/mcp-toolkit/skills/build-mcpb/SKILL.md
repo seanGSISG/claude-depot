@@ -3,6 +3,18 @@ name: build-mcpb
 description: This skill should be used when the user asks to "build an MCPB", "create a desktop extension", "package an MCP server", "create an mcpb file", "distribute an MCP server", "bundle my MCP server", "create a local MCP extension", "make an MCP Bundle", or needs guidance on packaging a local MCP server for single-click installation in Claude Desktop. Covers the full workflow from project setup through packing, testing, and signing.
 ---
 
+## Table of Contents
+
+- [When to Use MCPB vs. Remote Connector](#when-to-use-mcpb-vs-remote-connector)
+- [Platform Support](#platform-support)
+- [Five-Step Build Process](#five-step-build-process)
+- [Directory Structures](#directory-structures)
+- [CLI Command Reference](#cli-command-reference)
+- [Custom Exclusions with .mcpbignore](#custom-exclusions-with-mcpbignore)
+- [Development Workflow](#development-workflow)
+- [User Configuration](#user-configuration)
+- [Submitting to Anthropic Directory](#submitting-to-anthropic-directory)
+
 # Build an MCP Bundle (MCPB)
 
 MCP Bundles (`.mcpb`) are zip archives containing a local MCP server and a `manifest.json`. They enable single-click installation in Claude Desktop, similar to browser extensions (`.crx`, `.vsix`).

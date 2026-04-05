@@ -4,6 +4,15 @@ description: Formulas allow you to create calculated properties using data from 
 ---
 Formulas allow you to create calculated properties in [[Introduction to Bases|Bases]] using data from other [[Properties|properties]]. You can perform calculations, manipulate text, work with dates, and more. 
 
+## Table of Contents
+
+- [What formulas can do](#what-formulas-can-do)
+- [Create a formula property](#create-a-formula-property)
+- [Write a formula](#write-a-formula)
+- [Formula examples](#formula-examples)
+- [Data types](#data-types)
+- [Reference other formulas](#reference-other-formulas)
+
 ## What formulas can do
 
 Formulas can help you:
@@ -178,3 +187,5 @@ formula.price_per_unit * 1.1
 
 > [!warning] Avoid circular references
 > A formula cannot reference itself directly or indirectly through other formulas.
+
+> Sources: https://help.obsidian.md/bases/Formulas

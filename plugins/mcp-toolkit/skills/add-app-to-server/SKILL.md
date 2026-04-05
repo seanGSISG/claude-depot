@@ -3,6 +3,34 @@ name: add-app-to-server
 description: This skill should be used when the user asks to "add an app to my MCP server", "add UI to my MCP server", "add a view to my MCP tool", "enrich MCP tools with UI", "add interactive UI to existing server", "add MCP Apps to my server", or needs to add interactive UI capabilities to an existing MCP server that already has tools. Provides guidance for analyzing existing tools and adding MCP Apps UI resources.
 ---
 
+## Table of Contents
+
+- [How It Works](#how-it-works)
+- [Getting Reference Code](#getting-reference-code)
+  - [API Reference (Source Files)](#api-reference-source-files)
+  - [Key Examples (Mixed Tool Patterns)](#key-examples-mixed-tool-patterns)
+  - [Framework Templates](#framework-templates)
+- [Step 1: Analyze Existing Tools](#step-1-analyze-existing-tools)
+  - [Decision Framework](#decision-framework)
+- [Step 2: Add Dependencies](#step-2-add-dependencies)
+- [Step 3: Set Up the Build Pipeline](#step-3-set-up-the-build-pipeline)
+  - [Vite Configuration](#vite-configuration)
+  - [HTML Entry Point](#html-entry-point)
+  - [Build Scripts](#build-scripts)
+- [Step 4: Convert Tools to App Tools](#step-4-convert-tools-to-app-tools)
+- [Step 5: Register Resources](#step-5-register-resources)
+- [Step 6: Build the UI](#step-6-build-the-ui)
+  - [Handler Registration](#handler-registration)
+  - [Host Styling](#host-styling)
+- [Optional Enhancements](#optional-enhancements)
+  - [App-Only Helper Tools](#app-only-helper-tools)
+  - [CSP Configuration](#csp-configuration)
+  - [Streaming Partial Input](#streaming-partial-input)
+  - [Graceful Degradation with getUiCapability()](#graceful-degradation-with-getuicapability)
+  - [Fullscreen Mode](#fullscreen-mode)
+- [Common Mistakes to Avoid](#common-mistakes-to-avoid)
+- [Testing](#testing)
+
 # Add UI to MCP Server
 
 Enrich an existing MCP server's tools with interactive UIs using the MCP Apps SDK (`@modelcontextprotocol/ext-apps`).

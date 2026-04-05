@@ -65,3 +65,5 @@ The order in which variables, filters, fallbacks, conditionals, and loops are ev
 ## Template validation
 
 The Obsidian Web Clipper template editor **validates template syntax**. Invalid logic (e.g. malformed conditionals or loops) will be reported in the editor. When generating templates, use only logic constructs and syntax described on the official Logic page so that the template passes validation.
+
+> Sources: Synthesized from Obsidian Web Clipper documentation at https://help.obsidian.md/web-clipper/

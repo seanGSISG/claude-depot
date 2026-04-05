@@ -8,6 +8,20 @@ permalink: uri
 ---
 Obsidian URI is a custom URI protocol supported by Obsidian that lets you trigger various actions, such as opening a note or creating a note. Obsidian URI enables automation and cross-app workflows.
 
+## Table of Contents
+
+- [URI format](#uri-format)
+- [Open note](#open-note)
+- [Create note](#create-note)
+- [Create or open daily note](#create-or-open-daily-note)
+- [Unique Note](#unique-note)
+- [Open search](#open-search)
+- [Open Vault Manager](#open-vault-manager)
+- [Integrate with Hook](#integrate-with-hook)
+- [Use x-callback-url parameters](#use-x-callback-url-parameters)
+- [Shorthand formats](#shorthand-formats)
+- [Troubleshooting](#troubleshooting)
+
 ## URI format
 
 Obsidian URIs use the following format:
@@ -194,3 +208,5 @@ On Linux, it is a much more involved process:
 
 
 [^1]: Vault ID is the random 16-character code assigned to the vault, for example `ef6ca3e3b524d22f`. This ID is unique per folder on your computer. The ID can be found by opening the vault switcher and clicking "Copy vault ID" in the context menu for the desired vault.
+
+> Sources: https://help.obsidian.md/extending-obsidian/Obsidian+URI

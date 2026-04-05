@@ -75,3 +75,5 @@ The `properties` array defines the YAML frontmatter of the note.
 
 The Clipper template editor checks template syntax. 
 Invalid logic in `noteContentFormat` or property `value` fields will be reported in the editor; use valid syntax as described in the [Logic](https://help.obsidian.md/web-clipper/logic) documentation.
+
+> Sources: Synthesized from Obsidian Web Clipper documentation at https://help.obsidian.md/web-clipper/

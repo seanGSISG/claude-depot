@@ -16,6 +16,15 @@ Obsidian can automatically update internal links in your vault when you rename a
 
 **[[Settings]]** → **[[Settings#Files and links|Files and links]]** → **[[Settings#Automatically update internal links|Automatically update internal links]]**.
 
+## Table of Contents
+
+- [Supported formats for internal links](#supported-formats-for-internal-links)
+- [Link to a file](#link-to-a-file)
+- [Link to a heading in a note](#link-to-a-heading-in-a-note)
+- [Link to a block in a note](#link-to-a-block-in-a-note)
+- [Change the link display text](#change-the-link-display-text)
+- [Preview a linked file](#preview-a-linked-file)
+
 ## Supported formats for internal links
 
 Obsidian supports the following link formats:
@@ -49,8 +58,6 @@ To create a link while in Editing view, use either of the following ways:
 - Type `[[` in the editor and then select the file you want to create a link to.
 - Select text in the editor and then type `[[`.
 - Open the [[Command palette]] and then select Add internal link.
-
-![[Quick switcher#^search-autocomplete-large]]
 
 While you can link to any of the [[Accepted file formats]], links to file formats other than Markdown needs to include a file extension, such as `[[Figure 1.png]]`.
 
@@ -89,7 +96,7 @@ For example, `[[##` will search generically across the vault, whereas `[[## t
 
 > [!info]- Screenshot of searching for a heading link
 >
-> ![[internal-links-header.png#interface]]
+> (Screenshot: shows the heading link search interface)
 
 ## Link to a block in a note
 
@@ -129,7 +136,7 @@ For *specific lines within a list*, the block identifier can be placed directly 
 You can also search for blocks to link to from across your vault using the `[[^^block]]` syntax. However, more items qualify as blocks compared to [[#Link to a heading in a note|heading links]], so this list will be much longer.
 
 > [!info]- Screenshot of searching for a block link 
-> ![[link-block-heading.png#interface]]
+> (Screenshot: shows the block link search interface)
 
 You can also create human-readable block identifiers by adding a blank space followed by a caret (`^`) and the identifier. Block identifiers can only consist of Latin letters, numbers, and dashes.
 
@@ -180,3 +187,5 @@ For example, if you regularly refer to `[[Three laws of motion]]` as `[[The 3 la
 > To preview linked files, you first need to enable [[Page preview]].
 
 To preview a linked file, hover over an internal link. While in editing mode, press `Ctrl` (or `Cmd` on macOS) while hovering the cursor over the link. A preview of the file content appears next to the cursor.
+
+> Sources: https://help.obsidian.md/linking-notes-and-files/Internal+links

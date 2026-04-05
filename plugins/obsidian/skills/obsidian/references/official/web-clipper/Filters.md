@@ -6,6 +6,62 @@ Filters allow you to modify [[variables]] in [[Obsidian Web Clipper/Templates|We
 - Filters work for any kind of [[Variables|variable]] including `prompt`, `meta`, `selector`, and `schema` variables.
 - Filters can be chained, e.g. `{{variable|filter1|filter2}}`, and are applied in the order they are added.
 
+## Table of Contents
+
+- [Dates](#dates)
+  - [`date`](#date)
+  - [`date_modify`](#datemodify)
+  - [`duration`](#duration)
+- [Text conversion and capitalization](#text-conversion-and-capitalization)
+  - [`camel`](#camel)
+  - [`capitalize`](#capitalize)
+  - [`decode_uri`](#decodeuri)
+  - [`kebab`](#kebab)
+  - [`lower`](#lower)
+  - [`pascal`](#pascal)
+  - [`replace`](#replace)
+  - [`safe_name`](#safename)
+  - [`snake`](#snake)
+  - [`title`](#title)
+  - [`trim`](#trim)
+  - [`uncamel`](#uncamel)
+  - [`upper`](#upper)
+- [Text formatting](#text-formatting)
+  - [`blockquote`](#blockquote)
+  - [`callout`](#callout)
+  - [`footnote`](#footnote)
+  - [`fragment_link`](#fragmentlink)
+  - [`image`](#image)
+  - [`link`](#link)
+  - [`list`](#list)
+  - [`table`](#table)
+  - [`wikilink`](#wikilink)
+- [Numbers](#numbers)
+  - [`calc`](#calc)
+  - [`length`](#length)
+  - [`round`](#round)
+- [HTML processing](#html-processing)
+  - [`markdown`](#markdown)
+  - [`remove_attr`](#removeattr)
+  - [`remove_html`](#removehtml)
+  - [`remove_tags`](#removetags)
+  - [`replace_tags`](#replacetags)
+  - [`strip_attr`](#stripattr)
+  - [`strip_md`](#stripmd)
+  - [`strip_tags`](#striptags)
+- [Arrays and objects](#arrays-and-objects)
+  - [`first`](#first)
+  - [`join`](#join)
+  - [`last`](#last)
+  - [`map`](#map)
+  - [`merge`](#merge)
+  - [`nth`](#nth)
+  - [`object`](#object)
+  - [`slice`](#slice)
+  - [`split`](#split)
+  - [`template`](#template)
+  - [`unique`](#unique)
+
 ## Dates
 
 Convert and modify dates.
@@ -380,3 +436,5 @@ Removes duplicate values from arrays and objects.
 - For arrays of objects: `[{"a":1},{"b":2},{"a":1}]|unique` returns `[{"a":1},{"b":2}]`.
 - For objects it removes properties with duplicate values, keeping the last occurrence's key.
 - For strings it returns the input unchanged.
+
+> Sources: https://help.obsidian.md/web-clipper/Filters

@@ -63,3 +63,5 @@ Schema.org values can also be used to [[Variables#Schema.org variables|pre-popul
 ### Interpreter context
 
 When [[Interpret web pages|Interpreter]] is enabled, you can use [[Variables#Prompt variables|prompt variables]] to extract page content with natural language. For each template you can define the [[Interpret web pages#Context|context]] that Interpreter has access too. 
+
+> Sources: https://help.obsidian.md/web-clipper/Templates

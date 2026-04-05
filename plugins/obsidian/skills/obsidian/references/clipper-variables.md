@@ -62,3 +62,5 @@ Examples:
 When a variable is empty, you can supply a default value (fallback). 
 Fallbacks can be chained (try variable A, then B, then a literal default) and used with filters. 
 For syntax and evaluation order, see [clipper-logic.md](clipper-logic.md).
+
+> Sources: Synthesized from Obsidian Web Clipper documentation at https://help.obsidian.md/web-clipper/

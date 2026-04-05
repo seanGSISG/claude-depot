@@ -1,6 +1,6 @@
 {
   "name": "obsidian",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Comprehensive Obsidian skill covering Markdown (wikilinks, callouts, embeds, properties), Bases (.base files, formulas, views), CLI, and Web Clipper templates",
   "author": {
     "name": "seanGSISG",
@@ -9,5 +9,13 @@
   "homepage": "https://github.com/seanGSISG/claude-depot",
   "repository": "https://github.com/seanGSISG/claude-depot",
   "license": "MIT",
-  "keywords": ["obsidian", "markdown", "bases", "web-clipper", "vault", "notes", "knowledge-management"]
+  "keywords": [
+    "obsidian",
+    "markdown",
+    "bases",
+    "web-clipper",
+    "vault",
+    "notes",
+    "knowledge-management"
+  ]
 }

@@ -50,3 +50,5 @@ ob logout
 ## Services
 
 - [[Headless Sync]]: use [[Introduction to Obsidian Sync|Obsidian Sync]] from the command line without the desktop app.
+
+> Sources: https://help.obsidian.md/obsidian-cli/Obsidian+Headless

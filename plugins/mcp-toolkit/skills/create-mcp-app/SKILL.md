@@ -3,6 +3,15 @@ name: create-mcp-app
 description: This skill should be used when the user asks to "create an MCP App", "build a new MCP server with a UI", "build an interactive MCP View", "scaffold a new MCP App project", "build an MCP App from scratch", or needs guidance on MCP Apps SDK patterns, UI-resource registration, MCP App lifecycle, or host integration. Provides comprehensive guidance for building MCP Apps with interactive UIs.
 ---
 
+## Table of Contents
+
+- [Core Concept: Tool + Resource](#core-concept-tool--resource)
+- [Quick Start Decision Tree](#quick-start-decision-tree)
+- [Getting Reference Code](#getting-reference-code)
+- [Critical Implementation Notes](#critical-implementation-notes)
+- [Common Mistakes to Avoid](#common-mistakes-to-avoid)
+- [Testing](#testing)
+
 # Create MCP App
 
 Build interactive UIs that run inside MCP-enabled hosts like Claude Desktop. An MCP App combines an MCP tool with an HTML resource to display rich, interactive content.

@@ -10,6 +10,29 @@ publish: true
 
 Learn how to apply basic formatting to your notes, using [Markdown](https://daringfireball.net/projects/markdown/). For more advanced formatting syntax, refer to [[Advanced formatting syntax]].
 
+## Table of Contents
+
+- [Paragraphs](#paragraphs)
+  - [Line breaks](#line-breaks)
+- [Headings](#headings)
+- [Bold, italics, highlights](#bold-italics-highlights)
+- [Internal links](#internal-links)
+- [External links](#external-links)
+  - [Escape blank spaces in links](#escape-blank-spaces-in-links)
+- [External images](#external-images)
+- [Quotes](#quotes)
+- [Lists](#lists)
+  - [Task lists](#task-lists)
+  - [Nesting lists](#nesting-lists)
+- [Horizontal rule](#horizontal-rule)
+- [Code](#code)
+  - [Inline code](#inline-code)
+  - [Code blocks](#code-blocks)
+- [Footnotes](#footnotes)
+- [Comments](#comments)
+- [Escaping Markdown Syntax](#escaping-markdown-syntax)
+- [Learn more](#learn-more)
+
 ## Paragraphs
 
 To create paragraphs in Markdown, use a **blank line** to separate blocks of text. Each block of text separated by a blank line is treated as a distinct paragraph.
@@ -193,8 +216,6 @@ You can add images with external URLs, by adding a `!` symbol before an [[#Exter
 ```md
 ![Engelbart](https://history-computer.com/ModernComputer/Basis/images/Engelbart.jpg)
 ```
-
-![Engelbart](https://history-computer.com/ModernComputer/Basis/images/Engelbart.jpg)
 
 You can change the image dimensions, by adding `|640x480` to the link destination, where 640 is the width and 480 is the height.
 
@@ -519,3 +540,5 @@ When working with numbered lists, you may need to escape the period after the nu
 To learn more advanced formatting syntax, such as tables, diagrams, and math expressions, refer to [[Advanced formatting syntax]].
 
 To learn more about how Obsidian parses Markdown, refer to [[Obsidian Flavored Markdown]].
+
+> Sources: https://help.obsidian.md/editing-and-formatting/Basic+formatting+syntax

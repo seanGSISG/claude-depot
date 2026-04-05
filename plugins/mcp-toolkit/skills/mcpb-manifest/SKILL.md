@@ -3,6 +3,26 @@ name: mcpb-manifest
 description: This skill should be used when the user asks to "configure manifest.json", "mcpb manifest spec", "manifest.json fields", "user_config in mcpb", "mcpb icon configuration", "set up manifest for desktop extension", "mcpb compatibility settings", "mcpb server types", "mcp_config variables", or needs detailed reference for the manifest.json file used in MCPB desktop extensions. Provides the complete field reference, user_config schema, server type examples, and variable substitution patterns.
 ---
 
+## Table of Contents
+
+- [Minimal manifest.json](#minimal-manifestjson)
+- [Required Fields](#required-fields)
+- [Server Configuration](#server-configuration)
+  - [Server Types](#server-types)
+  - [mcp_config](#mcp_config)
+  - [Variable Substitution in mcp_config](#variable-substitution-in-mcp_config)
+  - [Platform-Specific Overrides](#platform-specific-overrides)
+- [User Configuration](#user-configuration)
+  - [Configuration Field Schema](#configuration-field-schema)
+  - [All Config Types Example](#all-config-types-example)
+  - [Referencing user_config Values](#referencing-user_config-values)
+- [Optional Metadata Fields](#optional-metadata-fields)
+- [Icons](#icons)
+- [Compatibility](#compatibility)
+- [Full Example manifest.json](#full-example-manifestjson)
+- [Validate Your Manifest](#validate-your-manifest)
+- [Localization](#localization)
+
 # MCPB manifest.json Reference
 
 The `manifest.json` file is the required metadata descriptor for every MCPB bundle. It tells Claude Desktop what the extension does, how to run it, what tools it provides, and what configuration it needs.

@@ -61,3 +61,5 @@ Where the list has a block ID:
 tag:#project status:done
 ```
 ````
+
+> Sources: Synthesized from Obsidian editing documentation at https://help.obsidian.md/editing-and-formatting/

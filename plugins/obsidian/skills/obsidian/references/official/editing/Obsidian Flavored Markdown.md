@@ -39,3 +39,5 @@ Obsidian supports [CommonMark](https://commonmark.org/), [GitHub Flavored Markdo
 | `- [x]`         | [[Basic formatting syntax#Task lists\|Completed task]]                |
 | `> [!note]`     | [[Callouts]]                                                          |
 | (see link)      | [[Advanced formatting syntax#Tables\|Tables]]                         |
+
+> Sources: https://help.obsidian.md/editing-and-formatting/Obsidian+Flavored+Markdown

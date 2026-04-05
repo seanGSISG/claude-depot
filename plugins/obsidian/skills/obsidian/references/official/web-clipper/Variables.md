@@ -11,6 +11,14 @@ Use the `...` icon in the [[Introduction to Obsidian Web Clipper|Web Clipper]] e
 - [[Variables#Selector variables|Selector variables]]
 - [[Variables#Schema.org variables|Schema.org variables]]
 
+## Table of Contents
+
+- [Preset variables](#preset-variables)
+- [Prompt variables](#prompt-variables)
+- [Meta variables](#meta-variables)
+- [Selector variables](#selector-variables)
+- [Schema.org variables](#schemaorg-variables)
+
 ## Preset variables
 
 Preset variables are automatically generated based on the page content. These typically work for most websites.
@@ -118,3 +126,5 @@ Nested properties and array access work as well, both with and without the schem
 - `{{schema:author[0].name}}` will access the `name` of the first author in an array of authors.
 - `{{schema:author[*].name}}` will return an array of all author names.
 
+
+> Sources: https://help.obsidian.md/web-clipper/Variables

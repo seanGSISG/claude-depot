@@ -42,3 +42,5 @@ views:
 ```
 ~~~
 
+
+> Sources: https://help.obsidian.md/bases/Create+a+base

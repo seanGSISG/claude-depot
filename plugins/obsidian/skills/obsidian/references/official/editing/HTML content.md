@@ -85,3 +85,5 @@ Span and div tags can be used to apply custom classes from a [[CSS snippets|CSS 
 
 Need to strike <s>some text</s>? Use `<s>this</s>` to strike it out.
 
+
+> Sources: https://help.obsidian.md/editing-and-formatting/HTML+content

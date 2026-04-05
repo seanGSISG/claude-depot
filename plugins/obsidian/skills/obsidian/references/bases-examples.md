@@ -1,5 +1,12 @@
 # Bases Examples
 
+## Table of Contents
+
+- [Task Tracker Base](#task-tracker-base)
+- [Reading List Base](#reading-list-base)
+- [Daily Notes Index](#daily-notes-index)
+
+
 ## Task Tracker Base
 
 ```yaml
@@ -122,3 +129,5 @@ views:
       - formula.word_estimate
       - file.mtime
 ```
+
+> Sources: Synthesized from https://help.obsidian.md/bases/Bases+syntax, https://help.obsidian.md/bases/Functions

@@ -60,3 +60,5 @@ Footer functionality includes:
 - **Folder** field to define which folder to save to.
 - **Interpreter** to run [[Interpret web pages|natural language prompts]] on the page.
 
+
+> Sources: https://help.obsidian.md/web-clipper/Clip+web+pages

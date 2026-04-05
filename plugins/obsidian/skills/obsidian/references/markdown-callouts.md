@@ -56,3 +56,5 @@
   --callout-icon: lucide-alert-circle;
 }
 ```
+
+> Sources: Synthesized from Obsidian editing documentation at https://help.obsidian.md/editing-and-formatting/

@@ -3,6 +3,40 @@ name: convert-web-app
 description: This skill should be used when the user asks to "add MCP App support to my web app", "turn my web app into a hybrid MCP App", "make my web page work as an MCP App too", "wrap my existing UI as an MCP App", "convert iframe embed to MCP App", "turn my SPA into an MCP App", or needs to add MCP App support to an existing web application while keeping it working standalone. Provides guidance for analyzing existing web apps and creating a hybrid web + MCP App with server-side tool and resource registration.
 ---
 
+## Table of Contents
+
+- [How It Works](#how-it-works)
+- [Getting Reference Code](#getting-reference-code)
+  - [API Reference (Source Files)](#api-reference-source-files)
+  - [Framework Templates](#framework-templates)
+  - [Reference Examples](#reference-examples)
+- [Step 1: Analyze the Existing Web App](#step-1-analyze-the-existing-web-app)
+  - [What to Investigate](#what-to-investigate)
+  - [Data Source Mapping](#data-source-mapping)
+- [Step 2: Investigate CSP Requirements](#step-2-investigate-csp-requirements)
+- [Step 3: Set Up the MCP Server](#step-3-set-up-the-mcp-server)
+  - [Dependencies](#dependencies)
+  - [Server Code](#server-code)
+  - [Package Scripts](#package-scripts)
+- [Step 4: Adapt the Build Pipeline](#step-4-adapt-the-build-pipeline)
+  - [Vite Configuration](#vite-configuration)
+  - [HTML Entry Point](#html-entry-point)
+  - [Two-Phase Build](#two-phase-build)
+- [Step 5: Add MCP App Initialization Alongside Existing Logic](#step-5-add-mcp-app-initialization-alongside-existing-logic)
+  - [The Hybrid Pattern](#the-hybrid-pattern)
+  - [URL Parameters (Hybrid)](#url-parameters-hybrid)
+  - [API Calls (Hybrid)](#api-calls-hybrid)
+  - [localStorage / sessionStorage (Hybrid)](#localstorage--sessionstorage-hybrid)
+  - [Complete Hybrid Example](#complete-hybrid-example)
+- [Step 6: Add Host Styling Integration (MCP Mode Only)](#step-6-add-host-styling-integration-mcp-mode-only)
+- [Optional Enhancements](#optional-enhancements)
+  - [App-Only Helper Tools](#app-only-helper-tools)
+  - [Streaming Partial Input](#streaming-partial-input)
+  - [Fullscreen Mode](#fullscreen-mode)
+  - [Text Fallback](#text-fallback)
+- [Common Mistakes to Avoid](#common-mistakes-to-avoid)
+- [Testing](#testing)
+
 # Add MCP App Support to a Web App
 
 Add MCP App support to an existing web application so it works both as a standalone web app **and** as an MCP App that renders inline in MCP-enabled hosts like Claude Desktop — from a single codebase.

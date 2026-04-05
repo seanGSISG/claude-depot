@@ -14,6 +14,15 @@ To embed a file in your vault, add an exclamation mark (`!`) in front of an [[In
 > [!tip] Drag and Drop embed  
 > On desktop, you can also drag and drop supported files directly into your note to embed them automatically.
 
+## Table of Contents
+
+- [Embed a note in another note](#embed-a-note-in-another-note)
+- [Embed an image in a note](#embed-an-image-in-a-note)
+- [Embed an audio file in a note](#embed-an-audio-file-in-a-note)
+- [Embed a PDF in a note](#embed-a-pdf-in-a-note)
+- [Embed a list in a note](#embed-a-list-in-a-note)
+- [Embed search results](#embed-search-results)
+
 ## Embed a note in another note
 
 To embed a note:
@@ -28,9 +37,7 @@ You can also embed links to [[Internal links#Link to a heading in a note|heading
 ![[Internal links#^b15695]]
 ```
 
-The text below is an example of an embedded block:
-
-![[Internal links#^b15695]]
+The text below is an example of an embedded block. It would render the content of the block `^b15695` from the Internal links note.
 
 ## Embed an image in a note
 
@@ -40,8 +47,6 @@ To embed an image:
 ![[Engelbart.jpg]]
 ```
 
-![[Engelbart.jpg#outline]]
-
 You can change the image dimensions, by adding `|640x480` to the link destination, where 640 is the width and 480 is the height.
 
 ```md
@@ -50,15 +55,11 @@ You can change the image dimensions, by adding `|640x480` to the link destinatio
 
 If you only specify the width, the image scales according to its original aspect ratio. For example, `![[Engelbart.jpg|100]]`.
 
-![[Engelbart.jpg#outline|100]]
-
 You can also embed an externally hosted image by using a markdown link. You can control the width and height the same way as a wikilink. 
 
 ```md
 ![250](https://publish-01.obsidian.md/access/f786db9fac45774fa4f0d8112e232d67/Attachments/Engelbart.jpg)
 ```
-
-![250](https://publish-01.obsidian.md/access/f786db9fac45774fa4f0d8112e232d67/Attachments/Engelbart.jpg)
 
 ## Embed an audio file in a note
 
@@ -67,8 +68,6 @@ To embed an audio file:
 ```md
 ![[Excerpt from Mother of All Demos (1968).ogg]]
 ```
-
-![[Excerpt from Mother of All Demos (1968).ogg]]
 
 ## Embed a PDF in a note
 
@@ -110,4 +109,6 @@ Then link to the list using the block identifier:
 
 ## Embed search results 
 
-![[Search#Embed search results in a note]]
+See the "Embed search results in a note" section in the Search documentation.
+
+> Sources: https://help.obsidian.md/linking-notes-and-files/Embed+files

@@ -61,3 +61,5 @@ Tags can't contain blank spaces. To separate two or more words, you can instead 
 - #PascalCase
 - #snake_case
 - #kebab-case
+
+> Sources: https://help.obsidian.md/editing-and-formatting/Tags

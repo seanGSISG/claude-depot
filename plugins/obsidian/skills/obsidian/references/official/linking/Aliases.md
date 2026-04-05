@@ -14,7 +14,10 @@ Use aliases for things like acronyms, nicknames, or to refer to a note in a diff
 
 If you're only trying to change how a link looks in one place, see how to [[Internal links#Change the link display text|Change the link display text]] instead.
 
-![[Internal links#^callout-internal-links-link-text]]
+> [!tip]
+> Use link display text when you want to customize how a link looks *in a specific place*.  
+> 
+> Use aliases when you want to refer to the same note using *different names* throughout your vault.
 
 ## Add an alias to a note
 
@@ -50,3 +53,5 @@ By using [[Backlinks]], you can find unlinked mentions of aliases.
 For example, after setting "AI" as an alias for "Artificial intelligence", you can see mentions of "AI" in other notes.
 
 If you link an unlinked mention to an alias, Obsidian turns the mention into an [[Internal links|internal link]] with the alias as its display text.
+
+> Sources: https://help.obsidian.md/linking-notes-and-files/Aliases

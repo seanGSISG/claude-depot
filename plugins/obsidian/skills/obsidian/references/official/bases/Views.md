@@ -5,22 +5,33 @@ Views allow you to organize the information in a [[Introduction to Bases|Base]] 
 
 For example, you may want to create a base called "Books" that has separate views for "Reading list" and "Recently finished".
 
+## Table of Contents
+
+- [Toolbar](#toolbar)
+- [Add and switch views](#add-and-switch-views)
+- [View settings](#view-settings)
+- [Layout](#layout)
+- [Filters](#filters)
+- [Sort and group results](#sort-and-group-results)
+- [Limit, copy, and export results](#limit-copy-and-export-results)
+- [Embed a view](#embed-a-view)
+
 ## Toolbar
 
 At the top of a base is a toolbar that lets you interact with views and their results.
 
-- ![[lucide-table.svg#icon]] **View menu** — create, edit, and switch views.
+- **View menu** — create, edit, and switch views.
 - **Results** — limit, copy and export files.
-- ![[lucide-arrow-up-down.svg#icon]] **Sort** — sort and group files.
-- ![[lucide-list-filter.svg#icon]] **Filter** — filter files.
-- ![[lucide-list.svg#icon]] **Properties** — choose properties to display and create [[formulas]].
-- ![[lucide-plus.svg#icon]] **New** — create a new file in the current view.
+- **Sort** — sort and group files.
+- **Filter** — filter files.
+- **Properties** — choose properties to display and create [[formulas]].
+- **+** **New** — create a new file in the current view.
 
 ## Add and switch views
 
 There are two ways to add a view to a base:
 
-- Click the view name in the top left and select ![[lucide-plus.svg#icon]] **Add view**.
+- Click the view name in the top left and select **+** **Add view**.
 - Use the [[command palette]] and select **Bases: Add view**.
 
 The first view in your list of views will load by default. Drag views by their icon to change their order.
@@ -36,7 +47,7 @@ Alternatively *right-click* the view name in the base's toolbar to quickly acces
 
 ## Layout
 
-Views can be displayed with different layouts including as  ![[lucide-table.svg#icon]] **table**, ![[lucide-list.svg#icon]] **list**, ![[lucide-layout-grid.svg#icon]] **cards**, and ![[lucide-map.svg#icon]] **map**. Additional layouts can be added by [[Community plugins]]. Some layouts are still being developed and require [[early access versions]] of Obsidian.
+Views can be displayed with different layouts including as **table**, **list**, **cards**, and **map**. Additional layouts can be added by [[Community plugins]]. Some layouts are still being developed and require [[early access versions]] of Obsidian.
 
 | Layout                | Description                                                                                   | App&nbsp;version |
 | --------------------- | --------------------------------------------------------------------------------------------- | ---------------- |
@@ -48,11 +59,11 @@ Views can be displayed with different layouts including as  ![[lucide-table.svg#
 
 ## Filters
 
-Open the ![[lucide-list-filter.svg#icon]] **Filter** menu at the top of a base to add filters.
+Open the **Filter** menu at the top of a base to add filters.
 
 A base without filters shows all the files in your vault. Filters narrow down the results to only show files that meet specific criteria. For example, you can use filters to only display files with a specific [[Tags|tag]] or within a specific folder. Many filter types are available.
 
-Filters can be applied to all views in a base, or just a single view by choosing from the two sections in the ![[lucide-list-filter.svg#icon]] **Filter** menu.
+Filters can be applied to all views in a base, or just a single view by choosing from the two sections in the **Filter** menu.
 
 - **All views** applies filters to all views in the base.
 - **This view** applies filters to the active view.
@@ -77,11 +88,11 @@ Filter groups allow you to create more complex logic by creating combinations on
 
 #### Advanced filter editor
 
-Click the code button ![[lucide-code-xml.svg#icon]] to use the **advanced filter** editor. This displays the raw [[Bases syntax|syntax]] for the filter, and can be used with more complex [[Functions|functions]] that cannot be displayed using the point-and-click interface.
+Click the **Code** button to use the **advanced filter** editor. This displays the raw [[Bases syntax|syntax]] for the filter, and can be used with more complex [[Functions|functions]] that cannot be displayed using the point-and-click interface.
 
 ## Sort and group results
 
-Open the ![[lucide-arrow-up-down.svg#icon]] **Sort** menu to sort and group the results in a view.
+Open the **Sort** menu to sort and group the results in a view.
 
 You can arrange results by one or more properties in ascending or descending order. This makes it easy to list notes by name, last edited time, or any other property — including formulas.
 
@@ -89,9 +100,9 @@ You can also group results by a property to organize similar items into visually
 
 ### Add a sort
 
-1. Open the ![[lucide-arrow-up-down.svg#icon]] **Sort** menu at the top of the view.
+1. Open the **Sort** menu at the top of the view.
 2. Choose the property you want to sort (or group) by.
-3. If you have multiple sorts, drag them up or down using the ![[lucide-grip-vertical.svg#icon]] grip handle to change their priority.
+3. If you have multiple sorts, drag them up or down using the **grip handle** to change their priority.
 
 The options for ordering results depend on the property type:
 
@@ -101,8 +112,8 @@ The options for ordering results depend on the property type:
 
 ### Remove a sort
 
-1. Open the ![[lucide-arrow-up-down.svg#icon]] **Sort** menu at the top of the view.
-2. Click the ![[lucide-trash-2.svg#icon]] trash can button next to the sort or group you want to remove.
+1. Open the **Sort** menu at the top of the view.
+2. Click the **trash** button next to the sort or group you want to remove.
 
 ## Limit, copy, and export results
 
@@ -123,3 +134,5 @@ This action saves a CSV of your current view.
 You can embed base files in [[Embed files|any other file]] using the `![[File.base]]` syntax. The first view in the list will be used. You can change the order by dragging views in the view menu.
 
 To specify the default view for an embed use `![[File.base#View]]`.
+
+> Sources: https://help.obsidian.md/bases/Views

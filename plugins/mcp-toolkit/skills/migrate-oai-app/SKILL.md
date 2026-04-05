@@ -3,6 +3,16 @@ name: migrate-oai-app
 description: This skill should be used when the user asks to "migrate from OpenAI Apps SDK", "convert OpenAI App to MCP", "port from window.openai", "migrate from skybridge", "convert openai/outputTemplate", or needs guidance on converting OpenAI Apps SDK applications to MCP Apps SDK. Provides step-by-step migration guidance with API mapping tables.
 ---
 
+## Table of Contents
+
+- [Best Practices](#best-practices)
+- [Getting Reference Code](#getting-reference-code)
+- [CSP Investigation](#csp-investigation)
+- [CORS Configuration](#cors-configuration)
+- [Key Conceptual Changes](#key-conceptual-changes)
+- [Before Finishing](#before-finishing)
+- [Testing](#testing)
+
 # Migrate OpenAI App to MCP
 
 Migrate existing OpenAI Apps SDK applications to the MCP Apps SDK (`@modelcontextprotocol/ext-apps`). The MCP Apps SDK provides a standardized, open protocol for interactive UIs in conversational clients.

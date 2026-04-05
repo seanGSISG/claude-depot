@@ -1,11 +1,9 @@
 ---
 name: setup-plan-to-vault
 description: >-
-  This skill should be used to configure the plan-to-vault plugin for first-time
-  use, or when the vault path needs to be changed. Trigger phrases include
-  "setup plan-to-vault", "configure plan-to-vault", "set vault path",
-  "plan-to-vault setup", or when the SessionStart hook reports that the vault
-  path is not configured.
+  Configure the plan-to-vault plugin for first-time use or change the vault
+  path. Triggers: "setup plan-to-vault", "configure plan-to-vault", "set vault
+  path", "plan-to-vault setup", or when vault path is not configured.
 ---
 
 # Plan-to-Vault Setup
@@ -22,12 +20,12 @@ Guide the user through configuring the plan-to-vault plugin.
    ```
    Present any found vaults as options.
 
-3. **Ask the user** which vault to use, or let them provide a custom path. Verify the path exists and has a `Notes/` directory.
+3. **Ask the user** which vault to use, or let them provide a custom path. Verify the path exists and has a `Notes/plan/` directory (created automatically by the plugin if missing).
 
 4. **Apply the configuration**: Tell the user to run this exact step:
    > Go to `/plugin` → select **plan-to-vault** → **Configure options** → set `vault_path` to: `<the chosen path>`
 
-   Note: Due to a known Claude Code issue (anthropics/claude-code#39455), plugin options cannot be set programmatically — the user must configure via the plugin menu.
+   Note: Plugin options cannot be set programmatically — the user must configure via the plugin menu.
 
 5. **Verify**: After the user confirms they've set it, check `$CLAUDE_PLUGIN_OPTION_VAULT_PATH` again to confirm it's populated. A session restart (`/reload-plugins`) may be needed for the env var to take effect.
 

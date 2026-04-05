@@ -1,29 +1,31 @@
 ---
 name: auto-categorize
 description: >-
-  Automatically turn raw text, a URL, or conversational content into a properly
-  formatted vault note. Use when the user pastes content and wants it saved,
-  shares a URL to capture, says "save this as a note", "clip this", "add this
-  to the vault", "categorize this", "turn this into a note", or wants to
-  quickly capture something without going through the interactive /new-note
-  flow. Also trigger if the user says "I found this useful, save it" or
-  describes information they want persisted to the vault.
+  Quick-capture raw text, a URL, or conversational content into a classified
+  vault note — no interactive prompts. Triggers: "save this as a note", "clip
+  this", "add this to the vault", "categorize this", "turn this into a note",
+  "I found this useful, save it".
 ---
 
 # Auto-Categorize
 
-Convert raw input into a classified vault note — the fast path for capturing knowledge without interactive selection.
+Convert raw input into a classified vault note — the fast path for capturing knowledge.
 
-Unlike `/new-note` (which asks the user to pick type and tags), this skill analyzes the content and proposes a classification automatically. It's ideal for quick captures where the user doesn't want to think about metadata.
+Unlike `/new-note` (interactive selection), this skill analyzes content and proposes classification automatically.
 
 ## Workflow
 
 1. **Identify input**: raw text pasted in conversation, a URL (fetch with WebFetch), or a topic the user described.
 
-2. **Classify**: Read `CLAUDE.md` for the schema. Analyze the content to determine the best type and tags (kebab-case). Consider the *kind* of content (code snippet? tutorial? reference doc?) for type, and the *topics* covered for tags.
+2. **Classify**: Read `CLAUDE.md` for the schema. Determine best type and tags (kebab-case). Consider content kind (code? tutorial? reference?) for type, and topics for tags.
 
-3. **Present**: Show the proposed title, type, and tags. Ask the user to confirm or adjust — this is a quick confirmation, not an interactive menu.
+3. **Present**: Show proposed title, type, and tags. Ask the user to confirm or adjust — quick confirmation, not interactive menu.
 
-4. **Generate**: Read the matching template from `Templates/<Type>.md` (every type has its own template). Format the content appropriately for the type (e.g., code blocks for configs, step-by-step structure for guides, structured sections for references).
+4. **Generate**: Read the matching template from `Templates/<Type>.md`. Format content appropriately for the type.
 
-5. **Write** to `Notes/<kebab-case-title>.md` and confirm.
+5. **Write** to `Notes/<type>/<kebab-case-title>.md` and confirm.
+
+## Tool guidance
+
+- **New content** (URL captures, user-provided text): Use Write to create the file.
+- **Existing file** being re-categorized: Use Edit for frontmatter changes, Bash `mv` to relocate.
