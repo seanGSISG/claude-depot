@@ -22,7 +22,7 @@ Download a `.skill` file from the table below, then upload via **Settings > Feat
 | Plugin | Description | .skill Download |
 |---|---|---|
 | **trmm-expert** | Tactical RMM documentation expert | [trmm-expert.skill][trmm-expert] |
-| **claude-docs** | Anthropic docs search (573 paths) | [docs.skill][docs] |
+| **claude-docs** | Anthropic docs search (Claude Code, API, Agent SDK) | [docs.skill][docs] |
 | **skill-creator-enhanced** | Skill creation guide with validators | [skill-creator-enhanced.skill][skill-creator] |
 | **rules-auditor** | Audit rules for staleness and quality | [rules-auditor.skill][rules-auditor] |
 | **obsidian** | Markdown, Bases, CLI, Web Clipper | [obsidian.skill][obsidian] |
