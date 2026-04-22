@@ -55,8 +55,7 @@ These plugins use hooks and scripts that only work when installed via `/plugin i
 |---|---|---|
 | **cache-cleanup** | Prune old cached plugin versions | `/plugin install cache-cleanup@claude-depot` |
 | **continual-learning** | Cross-session memory via hooks | `/plugin install continual-learning@claude-depot` |
-| **plan-to-vault** | Archive plans to Obsidian vault | `/plugin install plan-to-vault@claude-depot` |
-| **vault-tools** | Obsidian vault management (9 skills) | `/plugin install vault-tools@claude-depot` |
+| **vault-tools** | Obsidian vault toolkit (10 skills, plan archival, validation hooks) | `/plugin install vault-tools@claude-depot` |
 
 ## Contributing
 

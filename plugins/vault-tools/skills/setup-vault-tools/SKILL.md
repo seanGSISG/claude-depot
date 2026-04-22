@@ -1,15 +1,16 @@
 ---
 name: setup-vault-tools
 description: >-
-  Configure vault-tools for first-time use or change the vault path. Triggers:
-  "setup vault-tools", "configure vault-tools", "set vault path", "install
-  vault-tools", "get started with vault-tools", or when vault path is not
+  Configure vault-tools for first-time use or change the vault path. Covers
+  both note management and plan archival. Triggers: "setup vault-tools",
+  "configure vault-tools", "set vault path", "install vault-tools", "get
+  started with vault-tools", "setup plan archival", or when vault path is not
   configured.
 ---
 
 # Vault Tools Setup
 
-Guide the user through configuring the vault-tools plugin.
+Guide the user through configuring the vault-tools plugin. This covers both vault management (notes, search, maintenance) and automatic plan archival on `ExitPlanMode`.
 
 ## Workflow
 
@@ -32,4 +33,8 @@ Guide the user through configuring the vault-tools plugin.
 
 6. **Confirm rules bootstrapping**: Check `.claude/rules/` in vault for expected rule files.
 
-7. **Remind**: This plugin replaces `.claude/skills/`, `.claude/hooks/`, `.claude/rules/` in the vault — they're provided by the plugin on every machine.
+7. **Plan archival setup**: Verify `Notes/plan/` exists in the vault (the archival hook creates it if missing, but confirm now so the user knows where plans will land). If the vault has a `CLAUDE.md` defining valid note types, check that `plan` is in the list — warn the user to add it if missing, otherwise the frontmatter validator will flag every archived plan.
+
+8. **Offer bulk import**: Ask whether the user wants to import any existing plans from `~/.claude/plans/` into the vault via `/vault-tools:import-plans`. Skip if `~/.claude/plans/` is empty.
+
+9. **Remind**: This plugin replaces `.claude/skills/`, `.claude/hooks/`, `.claude/rules/` in the vault — they're provided by the plugin on every machine. The `ExitPlanMode` hook archives new plans automatically once `vault_path` is set.

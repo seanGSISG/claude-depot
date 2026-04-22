@@ -57,18 +57,11 @@
       "tags": ["obsidian", "markdown", "bases", "web-clipper", "vault", "notes", "knowledge-management"]
     },
     {
-      "name": "plan-to-vault",
-      "source": "./plugins/plan-to-vault",
-      "description": "Automatically archive Claude Code plan files to an Obsidian vault when exiting plan mode, with multi-machine origin tracking",
-      "category": "development",
-      "tags": ["obsidian", "plans", "vault", "planning", "sync", "hooks", "archive"]
-    },
-    {
       "name": "vault-tools",
       "source": "./plugins/vault-tools",
-      "description": "Vault-specific skills, rules, and hooks for Obsidian knowledge bases — note creation, search, inbox processing, maintenance, and frontmatter validation",
+      "description": "Obsidian vault toolkit — note creation, search, inbox processing, maintenance, frontmatter validation, and automatic plan archival on ExitPlanMode",
       "category": "productivity",
-      "tags": ["obsidian", "vault", "notes", "frontmatter", "knowledge-base", "skills", "hooks"]
+      "tags": ["obsidian", "vault", "notes", "frontmatter", "knowledge-base", "skills", "hooks", "plans", "planning", "archive"]
     },
     {
       "name": "cache-cleanup",

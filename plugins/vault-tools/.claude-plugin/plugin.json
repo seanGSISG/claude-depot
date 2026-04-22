@@ -1,6 +1,6 @@
 {
   "name": "vault-tools",
-  "description": "Vault-specific skills, rules, and hooks for the MyVault Obsidian knowledge base. Provides note creation, search, inbox processing, maintenance, and frontmatter validation.",
+  "description": "Obsidian vault toolkit — skills, rules, and hooks for note creation, search, inbox processing, maintenance, frontmatter validation, and automatic plan archival on ExitPlanMode.",
   "version": "1.0.2",
   "author": {
     "name": "seanGSISG",
@@ -14,7 +14,10 @@
     "vault",
     "notes",
     "frontmatter",
-    "knowledge-base"
+    "knowledge-base",
+    "plans",
+    "planning",
+    "archive"
   ],
   "userConfig": {
     "vault_path": {
