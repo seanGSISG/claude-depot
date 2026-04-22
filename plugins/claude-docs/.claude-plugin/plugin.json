@@ -1,6 +1,6 @@
 {
   "name": "claude-docs",
-  "description": "AI-powered search and access to 573 Anthropic documentation paths \u2014 Claude Code CLI, API, Agent SDK, and more",
+  "description": "AI-powered search and access to Anthropic documentation \u2014 Claude Code CLI, API, Agent SDK, and more",
   "version": "1.1.2",
   "author": {
     "name": "seanGSISG",
