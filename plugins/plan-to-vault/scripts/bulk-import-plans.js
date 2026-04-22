@@ -28,14 +28,11 @@ function main() {
     process.exit(1);
   }
 
-  const notesDir = path.join(vaultPath, "Notes");
+  const notesDir = path.join(vaultPath, "Notes", "plan");
   const plansDir = path.join(os.homedir(), ".claude", "plans");
   const origin = os.hostname();
 
-  if (!fs.existsSync(notesDir)) {
-    console.error(`Notes directory not found: ${notesDir}`);
-    process.exit(1);
-  }
+  fs.mkdirSync(notesDir, { recursive: true });
 
   if (!fs.existsSync(plansDir)) {
     console.error(`Plans directory not found: ${plansDir}`);

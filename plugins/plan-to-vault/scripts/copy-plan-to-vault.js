@@ -46,10 +46,8 @@ async function main() {
     process.exit(0);
   }
 
-  const notesDir = path.join(vaultPath, "Notes");
-  if (!fs.existsSync(notesDir)) {
-    process.exit(0);
-  }
+  const notesDir = path.join(vaultPath, "Notes", "plan");
+  fs.mkdirSync(notesDir, { recursive: true });
 
   const plansDir = path.join(os.homedir(), ".claude", "plans");
   if (!fs.existsSync(plansDir)) {
@@ -126,7 +124,7 @@ ${body}`;
   try {
     fs.writeFileSync(targetPath, note, "utf8");
     const output = {
-      additionalContext: `Plan archived to vault: Notes/${slug}.md (origin: ${origin})`,
+      additionalContext: `Plan archived to vault: Notes/plan/${slug}.md (origin: ${origin})`,
     };
     process.stdout.write(JSON.stringify(output));
   } catch {
