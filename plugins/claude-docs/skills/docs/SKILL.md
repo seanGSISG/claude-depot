@@ -1,29 +1,28 @@
 ---
 name: docs
-description: "Search and access 573 Anthropic documentation paths covering Claude Code CLI, API, Agent SDK, prompt library, and more. Supports natural language queries, content search, and direct topic lookup. Trigger on: /docs, documentation questions about Claude Code, Claude API, Agent SDK, prompt engineering, MCP, hooks, skills, tool use, streaming, batch processing, extended thinking, or any Anthropic platform feature."
+description: "Search and access Anthropic documentation covering Claude Code CLI, API, Agent SDK, and more. Supports natural language queries, content search, and direct topic lookup. Trigger on: /docs, documentation questions about Claude Code, Claude API, Agent SDK, prompt engineering, MCP, hooks, skills, tool use, streaming, batch processing, extended thinking, or any Anthropic platform feature."
 allowed-tools: Bash Read Glob Grep AskUserQuestion
 ---
 
 ## Overview
 
-This skill provides AI-powered search and access to a locally mirrored copy of Anthropic's official documentation. The documentation lives at `~/.claude-code-docs` and covers 573 paths across 6 categories, totaling 571 markdown files.
+This skill provides AI-powered search and access to a locally mirrored copy of Anthropic's official documentation. The documentation lives at `~/.claude-code-docs` and covers ~1,250 paths across five categories.
 
 When a user asks about Anthropic documentation, use the search tools and reference files described below to find the relevant content, read it, and synthesize an answer. Do not guess — always read the actual documentation before answering.
 
 ## Domain Concept Map
 
 **Documentation sources:** Two Anthropic domains are mirrored:
-- `code.claude.com` — Claude Code CLI documentation (46 pages)
-- `platform.claude.com` — Everything else: API, Agent SDK, guides, prompt library (527 pages)
+- `code.claude.com` — Claude Code CLI documentation
+- `platform.claude.com` — Everything else: API, Agent SDK, guides
 
-**Six categories** organize all 573 paths:
+**Five categories** organize the paths (approximate counts as of 2026-04):
 
 | Category | User Label | Paths | Covers |
 |---|---|---|---|
-| `claude_code` | Claude Code CLI | 46 | CLI setup, hooks, skills, MCP, memory, plugins, settings, sub-agents |
-| `api_reference` | Claude API | 377 | Messages API, models, batches, files, admin, multi-language SDKs (Python/TS/Go/Java/Kotlin/Ruby) |
-| `core_documentation` | Claude Documentation | 82 | Prompt engineering, tool use, vision, streaming, extended thinking, evaluation |
-| `prompt_library` | Prompt Library | 65 | Ready-to-use prompt templates |
+| `claude_code` | Claude Code CLI | ~43 | CLI setup, hooks, skills, MCP, memory, plugins, settings, sub-agents |
+| `api_reference` | Claude API | ~1,060 | Messages API, models, batches, files, admin, multi-language SDKs (Python/TS/Go/Java/Kotlin/Ruby) |
+| `core_documentation` | Claude Documentation | ~143 | Prompt engineering, tool use, vision, streaming, extended thinking, evaluation |
 | `release_notes` | Release Notes | 2 | Version history and system prompts |
 | `resources` | Resources | 1 | Additional resources |
 

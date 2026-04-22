@@ -18,13 +18,14 @@ Always use the **user-facing label** when presenting options to users. Users thi
 
 | Internal Category | User-Facing Label | Path Count | Description |
 |---|---|---|---|
-| `claude_code` | Claude Code CLI | 46 | CLI installation, configuration, hooks, skills, MCP, memory, plugins |
-| `api_reference` | Claude API | 377 | Messages API, admin API, models, batches, files, multi-language SDKs |
-| `api_reference` (agent-sdk subset) | Claude Agent SDK | 18 | Agent SDK overview, Python/TS, sessions, skills, subagents, MCP, plugins |
-| `core_documentation` | Claude Documentation | 82 | Prompt engineering, tool use, vision, streaming, evaluation, guides |
-| `prompt_library` | Prompt Library | 65 | Ready-to-use prompt templates for various tasks |
+| `claude_code` | Claude Code CLI | ~43 | CLI installation, configuration, hooks, skills, MCP, memory, plugins |
+| `api_reference` | Claude API | ~1,060 | Messages API, admin API, models, batches, files, multi-language SDKs |
+| `api_reference` (agent-sdk subset) | Claude Agent SDK | ~18 | Agent SDK overview, Python/TS, sessions, skills, subagents, MCP, plugins |
+| `core_documentation` | Claude Documentation | ~143 | Prompt engineering, tool use, vision, streaming, evaluation, guides |
 | `release_notes` | Release Notes | 2 | Version history and system prompts |
 | `resources` | Resources | 1 | Additional resources overview |
+
+> **Note:** Anthropic retired the standalone Prompt Library in April 2026. The prompt-engineering content was consolidated into `/docs/en/build-with-claude/prompt-engineering/*` (within `core_documentation`). Older `/en/resources/prompt-library/*` URLs now redirect there.
 
 **Special case:** Agent SDK paths (`/docs/en/agent-sdk/*`) are stored under `api_reference` but should be labeled "Claude Agent SDK" for users. The `get_product_label()` function handles this automatically.
 
@@ -92,12 +93,6 @@ Sections include:
 - `/docs/en/agents-and-tools/*` — Tool use, MCP, computer use, agent skills
 - `/docs/en/test-and-evaluate/*` — Testing, guardrails, evaluation
 - `/docs/en/get-started`, `/docs/en/intro` — Getting started guides
-
-### Prompt Library (`prompt_library`)
-
-Pattern: `/docs/en/resources/prompt-library/<template-name>`
-
-65 prompt templates (e.g., `code-clarifier`, `sql-sorcerer`, `python-bug-buster`).
 
 ### Release Notes (`release_notes`)
 

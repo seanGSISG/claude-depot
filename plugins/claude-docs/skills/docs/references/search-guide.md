@@ -129,7 +129,7 @@ Documentation files use double underscores (`__`) to represent path separators:
 | `/en/api/messages/create` | `en__api__messages__create.md` |
 | `/en/docs/agent-sdk/python` | `en__docs__agent-sdk__python.md` |
 | `/en/docs/build-with-claude/vision` | `en__docs__build-with-claude__vision.md` |
-| `/en/resources/prompt-library/code-clarifier` | `en__resources__prompt-library__code-clarifier.md` |
+| `/docs/en/build-with-claude/prompt-engineering/overview` | `docs__en__build-with-claude__prompt-engineering__overview.md` |
 
 **Rules:**
 - All lowercase
