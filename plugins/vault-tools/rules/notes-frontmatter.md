@@ -5,7 +5,7 @@ paths:
 
 # Notes Frontmatter Requirements
 
-Every file in `Notes/` MUST have valid YAML frontmatter between `---` delimiters.
+Every file in `Notes/<type>/` MUST have valid YAML frontmatter between `---` delimiters. The file's subfolder must match its `type` frontmatter field.
 
 ## Required Schema
 
@@ -30,7 +30,7 @@ status: active
 
 ## Valid Types
 
-reference, guide, config, agent, prompt, list, project, plan, diagram, note
+reference, guide, config, agent, prompt, list, project, plan, diagram, note, journal, journal-session
 
 ## Tags
 

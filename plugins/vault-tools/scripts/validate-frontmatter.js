@@ -7,7 +7,7 @@ const path = require("path");
 
 const VALID_TYPES = [
   "reference", "guide", "config", "agent", "prompt",
-  "list", "project", "plan", "diagram", "note",
+  "list", "project", "plan", "diagram", "note", "journal", "journal-session",
 ];
 const VALID_STATUSES = ["active", "draft", "archived"];
 
@@ -140,6 +140,21 @@ async function main() {
   // Check title
   if (!parseFrontmatterField(frontmatter, "title")) {
     errors.push("Missing 'title' field.");
+  }
+
+  // Check subfolder matches type field
+  const relativePath = path.relative(normalizedNotes, normalizedFile);
+  const parts = relativePath.split(path.sep);
+  if (parts.length >= 2 && typeValue && VALID_TYPES.includes(typeValue)) {
+    const subfolder = parts[0];
+    // Allow journal-session files in the journal/ subfolder
+    const isJournalMatch = subfolder === "journal" && typeValue === "journal-session";
+    if (subfolder !== typeValue && !isJournalMatch) {
+      errors.push(
+        `File is in Notes/${subfolder}/ but type is '${typeValue}'. ` +
+        `Move to Notes/${typeValue}/ or update the type field.`
+      );
+    }
   }
 
   if (errors.length > 0) {
