@@ -69,6 +69,13 @@
       "description": "Clean up old cached plugin versions to free disk space",
       "category": "development",
       "tags": ["cache", "cleanup", "maintenance", "plugins", "disk-space"]
+    },
+    {
+      "name": "ultra-research",
+      "source": "./plugins/ultra-research",
+      "description": "Structured human-in-the-loop deep research pipeline — outline -> fan-out -> report",
+      "category": "productivity",
+      "tags": ["research", "deep-research", "ultra-research", "web-search", "outline", "report-generation"]
     }
   ]
 }

@@ -56,6 +56,7 @@ These plugins use hooks and scripts that only work when installed via `/plugin i
 | **cache-cleanup** | Prune old cached plugin versions | `/plugin install cache-cleanup@claude-depot` |
 | **continual-learning** | Cross-session memory via hooks | `/plugin install continual-learning@claude-depot` |
 | **vault-tools** | Obsidian vault toolkit (10 skills, plan archival, validation hooks) | `/plugin install vault-tools@claude-depot` |
+| **ultra-research** | Human-in-the-loop deep research pipeline (5 skills + web-search agent) | `/plugin install ultra-research@claude-depot` |
 
 ## Contributing
 

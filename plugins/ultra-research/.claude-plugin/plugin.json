@@ -1,0 +1,22 @@
+{
+  "name": "ultra-research",
+  "displayName": "Ultra Research",
+  "description": "Structured human-in-the-loop deep research pipeline — outline -> fan-out -> report. Five manual slash commands plus a web-search subagent.",
+  "version": "1.0.0",
+  "author": {
+    "name": "seanGSISG",
+    "url": "https://github.com/seanGSISG"
+  },
+  "homepage": "https://github.com/seanGSISG/claude-depot",
+  "repository": "https://github.com/seanGSISG/claude-depot",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "deep-research",
+    "ultra-research",
+    "web-search",
+    "report-generation",
+    "outline",
+    "rhinoinsight"
+  ]
+}
