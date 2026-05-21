@@ -28,6 +28,28 @@ Then install the Python dependency used by the validator and report scripts:
 pip install pyyaml
 ```
 
+### Recommended: Exa MCP for better web-search quality
+
+The `web-search-agent` prefers Exa's MCP tools (`mcp__exa_websearch__web_search_exa` / `web_fetch_exa`) when available, falling back to Claude Code's native `WebSearch` / `WebFetch` otherwise. The agent works without Exa, but Exa returns cleaner full-page content which materially improves Phase 1's outline supplement and Phase 3's per-item research depth.
+
+To enable Exa (one-time setup):
+1. Get an API key from https://exa.ai
+2. Add the Exa MCP server to your Claude Code config (`~/.claude/settings.json` or a project `.mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "exa_websearch": {
+      "command": "npx",
+      "args": ["-y", "exa-mcp-server"],
+      "env": { "EXA_API_KEY": "<your key>" }
+    }
+  }
+}
+```
+
+3. Restart Claude Code and confirm `/mcp` shows `exa_websearch` connected.
+
 ## Commands
 
 All five skills are **manual-only** (`disable-model-invocation: true`). Claude never auto-triggers them — they fire only when you type the slash command.

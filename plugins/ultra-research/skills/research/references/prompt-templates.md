@@ -1,4 +1,4 @@
-# Prompt Templates — `/research` (Step 2 Web Search Supplement)
+# Prompt Templates — `/ultra-research:research` (Step 2 Web Search Supplement)
 
 This file holds the verbatim prompt template and one-shot example used by Step 2 of the `research` skill. It is loaded as a reference so SKILL.md can stay focused on workflow control. The template is a hard constraint — only substitute the `{variable}` placeholders; do not modify structure or wording.
 

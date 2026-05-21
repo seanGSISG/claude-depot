@@ -1,6 +1,6 @@
 ---
 name: research-report
-description: Convert per-item JSON results from /research-deep into a single markdown report with table of contents and per-item sections. Uses a bundled converter script — no per-run script regeneration.
+description: Convert per-item JSON results from /ultra-research:research-deep into a single markdown report with table of contents and per-item sections. Uses a bundled converter script — no per-run script regeneration.
 disable-model-invocation: true
 allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
 ---
@@ -9,9 +9,9 @@ allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
 
 ## Trigger
 
-`/research-report`
+`/ultra-research:research-report`
 
-Manual-only via `disable-model-invocation: true`. Final phase of the pipeline; invoked directly by the user or chained from `/research-deep`'s end-prompt.
+Manual-only via `disable-model-invocation: true`. Final phase of the pipeline; invoked directly by the user or chained from `/ultra-research:research-deep`'s end-prompt.
 
 ## Pipeline Context
 
@@ -51,8 +51,18 @@ python "$GENERATOR" \
   --topic-dir "<topic_dir>" \
   --results-dir "<output_dir>" \
   --toc-fields "<comma-separated user selections>" \
-  --output report.md
+  --format both \
+  --output report.md \
+  --html-output report.html
 ```
+
+The `--format` flag controls which output(s) are written:
+
+- `--format md` — writes `report.md` only
+- `--format html` — writes `report.html` only (single-file HTML with embedded CSS, no external assets)
+- `--format both` — writes both files (this is the default; covers users who skim in a browser AND users who want raw markdown)
+
+Before Step 3, optionally ask the user via AskUserQuestion which format(s) they want; pass the answer to `--format`. If you don't ask, default to `both` — it's cheap (one extra file) and removes a downstream "where's my HTML?" surprise.
 
 The script handles all of the conversion logic — see `references/converter-contract.md` for what it does (and what NOT to reimplement inline if you find yourself tempted to "fix" something on the fly).
 
@@ -62,7 +72,8 @@ Tell the user the path to the generated `report.md`. Offer to print the first ~3
 
 ## Output
 
-- `{topic}/report.md` — the final markdown report
+- `{topic}/report.md` — the markdown report (when `--format md` or `--format both`)
+- `{topic}/report.html` — the self-contained HTML report with embedded CSS (when `--format html` or `--format both`)
 
 ## References
 

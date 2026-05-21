@@ -1,4 +1,4 @@
-# Prompt Templates — `/research-deep` (Per-Item Subagent Prompt)
+# Prompt Templates — `/ultra-research:research-deep` (Per-Item Subagent Prompt)
 
 This file holds the verbatim per-item prompt template used by the `research-deep` skill when it fans out parallel `web-search-agent` subagents. The template is a hard constraint — only substitute the `{variable}` placeholders; do not modify structure or wording.
 
@@ -34,7 +34,7 @@ Task is complete only after validation passes.
 | `{item_related_info}` | Item's complete YAML record from `outline.yaml` (name + category + description) |
 | `{output_path}` | Absolute path to `{output_dir}/{item_name_slug}.json` (slugify: spaces → `_`, strip specials) |
 | `{fields_path}` | Absolute path to `{topic}/fields.yaml` |
-| `{validator_path}` | Absolute path to `validate_json.py`, discovered at start of `/research-deep` execution (see SKILL.md Step 1) |
+| `{validator_path}` | Absolute path to `validate_json.py`, discovered at start of `/ultra-research:research-deep` execution (see SKILL.md Step 1) |
 
 Slugify rule for `{item_name_slug}`: lowercase optional; replace spaces with `_`; strip characters outside `[A-Za-z0-9_-]`.
 
