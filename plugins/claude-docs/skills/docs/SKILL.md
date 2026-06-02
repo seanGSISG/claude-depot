@@ -39,26 +39,26 @@ Follow this workflow when handling documentation queries:
 ### Step 1: Sync the latest docs (MANDATORY — always do this first)
 
 Before searching or reading anything, pull the latest documentation. This is the
-first action for **every** docs request — it guarantees fresh content and a current
-search index, and clones the mirror on first use. Run exactly this:
+first action for **every** docs request — it guarantees fresh content and clones the
+mirror on first use. There is no search index to build (search runs over the live
+files). Run exactly this:
 
 ```bash
 DOCS="$HOME/.claude-code-docs"
 if [ -d "$DOCS/.git" ]; then
-  pre=$(git -C "$DOCS" rev-parse HEAD 2>/dev/null || echo none)
   git -C "$DOCS" pull --ff-only --quiet 2>/dev/null || true
-  post=$(git -C "$DOCS" rev-parse HEAD 2>/dev/null || echo none)
 else
-  git clone --quiet https://github.com/seanGSISG/claude-code-docs.git "$DOCS" && pre=none && post=new
+  git clone --quiet https://github.com/seanGSISG/claude-code-docs.git "$DOCS"
 fi
-# Refresh the runtime helper from tracked source
-if [ -f "$DOCS/scripts/claude-docs-helper.sh" ]; then
-  cp "$DOCS/scripts/claude-docs-helper.sh" "$DOCS/claude-docs-helper.sh" 2>/dev/null || true
-  chmod +x "$DOCS/claude-docs-helper.sh" 2>/dev/null || true
-fi
-# Rebuild the search index only when docs changed or the index is missing
-if [ "$pre" != "$post" ] || [ ! -f "$DOCS/docs/.search_index.json" ]; then
-  for py in python3 python; do command -v "$py" >/dev/null 2>&1 && { (cd "$DOCS" && "$py" scripts/build_search_index.py >/dev/null 2>&1); break; }; done
+# Refresh the runtime helper from tracked source (used for direct topic reads)
+[ -f "$DOCS/scripts/claude-docs-helper.sh" ] && { cp "$DOCS/scripts/claude-docs-helper.sh" "$DOCS/claude-docs-helper.sh" 2>/dev/null; chmod +x "$DOCS/claude-docs-helper.sh" 2>/dev/null; }
+# Best-effort: ensure ripgrep for the standalone helper (the Grep tool already
+# bundles ripgrep, so this is optional; grep is the universal fallback).
+if ! command -v rg >/dev/null 2>&1; then
+  if command -v winget >/dev/null 2>&1; then winget install --silent --accept-source-agreements --accept-package-agreements BurntSushi.ripgrep.MSVC >/dev/null 2>&1 || true
+  elif command -v brew >/dev/null 2>&1; then brew install ripgrep >/dev/null 2>&1 || true
+  elif command -v apt-get >/dev/null 2>&1; then sudo -n apt-get install -y ripgrep >/dev/null 2>&1 || true
+  fi
 fi
 echo "Docs ready: $(find "$DOCS/docs" -name '*.md' 2>/dev/null | wc -l | tr -d ' ') files"
 ```
@@ -73,24 +73,29 @@ Extract from the user's query:
 - **Product context** — if they specify one (e.g., "in the agent sdk", "cli hooks", "api rate limits")
 - **Query type** — how-to, reference lookup, comparison, discovery
 
-### Step 3: Run Search
+### Step 3: Locate the doc(s)
 
-Use the upstream helper script at `~/.claude-code-docs/claude-docs-helper.sh`:
+Search the live files with Claude Code's built-in tools — they use bundled ripgrep,
+so they are fast and return only compact results (paths/snippets), keeping token use
+low. Search the docs directory `~/.claude-code-docs/docs` (use the absolute `$HOME`
+path when calling the tools).
 
+- **Content search** — the **Grep** tool over the docs directory:
+  - Find candidate files: `output_mode: "files_with_matches"`.
+  - Rank by relevance: `output_mode: "count"` and prefer files with more matches.
+  - Disambiguate without opening files: `output_mode: "content"`, `-C: 2`, small `head_limit`.
+- **Topic / path lookup** — the **Glob** tool (filenames encode the path):
+  - `**/*<topic>*.md` over the docs directory — e.g. `hooks` → `claude-code__hooks.md`,
+    `docs__en__hooks.md`.
+
+Filenames map directly to doc paths, so a filename match is usually enough to pick the
+right doc. There is **no index** — results are always current.
+
+Shell fallback (e.g., when driving the helper standalone, outside the agent):
 ```bash
-# Content search (best for questions and concepts)
-~/.claude-code-docs/claude-docs-helper.sh --search-content "<keywords>"
-
-# Path search (best for finding specific docs)
-~/.claude-code-docs/claude-docs-helper.sh --search "<keywords>"
-
-# Direct topic lookup (fastest for known topics)
-~/.claude-code-docs/claude-docs-helper.sh <topic>
-```
-
-If the helper script is unavailable, fall back to Grep:
-```bash
-grep -ril "<keyword>" ~/.claude-code-docs/docs/ | head -20
+~/.claude-code-docs/claude-docs-helper.sh --search-content "<keywords>"   # ripgrep, grep fallback
+~/.claude-code-docs/claude-docs-helper.sh --search "<topic>"              # path match
+~/.claude-code-docs/claude-docs-helper.sh <topic>                         # direct topic read
 ```
 
 See `references/search-guide.md` for detailed search tool usage.
@@ -137,10 +142,11 @@ Some queries span multiple reference files or require special handling:
 
 ## Keeping Docs Current
 
-There is no background hook — syncing is explicit and always visible. The mirror is
-refreshed by the mandatory **Step 1** sync block at the start of this workflow, so
-every docs request pulls the latest content and rebuilds the index when it changed.
-The **`/docs-update`** command runs the same sync on demand without a search.
+There is no background hook and no search index — syncing is explicit and always
+visible. The mirror is refreshed by the mandatory **Step 1** sync block at the start
+of this workflow, so every docs request pulls the latest content; search then runs
+over the live files, so results are always current. The **`/docs-update`** command
+runs the same sync on demand without a search.
 
 ## Key Commands Quick Reference
 
@@ -174,6 +180,6 @@ grep -ril "keyword" ~/.claude-code-docs/docs/ | head -20
 
 - **Documentation is a mirror, not the source.** Always note that content comes from Anthropic's official documentation. Include official URLs when citing.
 - **Two base URLs:** Claude Code CLI pages are at `code.claude.com/docs/en/<page>`. Everything else is at `platform.claude.com/<path>`.
-- **Search index required for content search.** If `~/.claude-code-docs/docs/.search_index.json` is missing, content search won't work. Rebuild with: `cd ~/.claude-code-docs && python3 scripts/build_search_index.py`
+- **No search index — content search runs over the live files** via the Grep tool (bundled ripgrep) or the helper's `--search-content` (ripgrep, with `grep` as fallback). Always current; nothing to rebuild.
 - **Helper script requires Python 3.9+ for enhanced features.** Basic topic lookup and freshness checks work without Python. Content and path search need Python.
 - **~1,530 files, ~1,702 manifest paths.** The manifest tracks more paths than there are files; some are tracked but not downloadable (expected). Exact counts grow as Anthropic publishes docs — run `~/.claude-code-docs/claude-docs-helper.sh --status` for live numbers.

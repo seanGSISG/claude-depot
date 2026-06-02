@@ -1,8 +1,16 @@
-> Sources: claude-docs-helper.sh, scripts/lookup/search.py, scripts/lookup/manifest.py, scripts/lookup/config.py, scripts/lookup/formatting.py
+> Sources: claude-docs-helper.sh, scripts/lookup/manifest.py, scripts/lookup/config.py, scripts/lookup/formatting.py
 
 # Search Guide
 
-This reference explains how to use the documentation search tools, interpret results, and handle edge cases. All search is provided by the upstream helper script at `~/.claude-code-docs/claude-docs-helper.sh`.
+This reference explains how to locate documentation, interpret results, and handle edge cases.
+
+**Primary tools (preferred):** Claude Code's built-in **Grep** and **Glob** tools, which
+use bundled ripgrep. They run over the live files in `~/.claude-code-docs/docs`, return
+compact results, and need no index — so search is always current and token-light.
+
+**Helper script (standalone / fallback):** `~/.claude-code-docs/claude-docs-helper.sh`
+provides path search, direct topic reads, and a `--search-content` (ripgrep, with `grep`
+fallback) for use outside the agent.
 
 ## Table of Contents
 
@@ -18,42 +26,40 @@ This reference explains how to use the documentation search tools, interpret res
 
 ## Content Search
 
-Content search looks inside document text (titles, keywords, previews) to find relevant pages. Best for questions and concept lookups.
+Content search looks inside document text to find relevant pages. Best for questions
+and concept lookups. Use the **Grep** tool over `~/.claude-code-docs/docs` (it uses
+bundled ripgrep):
 
+- **Candidate files:** `Grep(pattern: "<query>", path: "<docs dir>", output_mode: "files_with_matches")`
+- **Rank by relevance:** `output_mode: "count"` — prefer files with more matches.
+- **Snippet to disambiguate without opening files:** `output_mode: "content"`, `-C: 2`,
+  small `head_limit` (e.g. 20).
+- Case-insensitive: `-i: true`. Filter to markdown with `glob: "*.md"` (the mirror is
+  all `.md`, so usually unnecessary).
+
+Filenames encode the doc path (see [Filename Conventions](#filename-conventions)), so a
+matched filename usually identifies the right doc and its product context directly —
+`docs__en__*` / `claude-code__*` are Claude Code CLI; `en__api__*` are the API;
+`en__docs__agent-sdk__*` are the Agent SDK. If matches span multiple products, consider
+asking the user which they mean (see the category map).
+
+**Standalone fallback (outside the agent):**
 ```bash
-~/.claude-code-docs/claude-docs-helper.sh --search-content "<query>"
+~/.claude-code-docs/claude-docs-helper.sh --search-content "<query>"   # ripgrep, grep fallback
 ```
-
-**Output format:** JSON with product context:
-```json
-{
-  "query": "hooks",
-  "total_results": 5,
-  "results": [
-    {
-      "path": "/docs/en/hooks",
-      "title": "Hooks",
-      "category": "claude_code",
-      "product": "Claude Code CLI",
-      "score": 115,
-      "preview": "Hooks allow you to...",
-      "keywords": ["hooks", "pretooluse", "posttooluse"],
-      "file": "docs/docs__en__hooks.md"
-    }
-  ],
-  "product_summary": {"Claude Code CLI": 3, "Claude Agent SDK": 2},
-  "unique_products": 2
-}
-```
-
-**Key fields for AI routing:**
-- `product_summary` — quickly see which product contexts are represented
-- `unique_products` — if 1, synthesize directly; if >1, consider asking the user
-- `file` — use this path to read the actual document content
+This prints the matching doc filenames (most-relevant first), which you then read.
 
 ## Path Search
 
-Path search uses fuzzy matching against all documented paths (~1,700). Best for finding specific documents by topic name.
+Best for finding specific documents by topic name. Since filenames encode the path, the
+fastest approach is the **Glob** tool over `~/.claude-code-docs/docs`:
+
+```
+Glob(pattern: "**/*<topic>*.md", path: "<docs dir>")
+# e.g. hooks -> claude-code__hooks.md, docs__en__hooks.md
+```
+
+**Standalone fallback** — the helper's fuzzy path search over all documented paths (~1,700):
 
 ```bash
 ~/.claude-code-docs/claude-docs-helper.sh --search "<query>"
@@ -165,7 +171,7 @@ ls ~/.claude-code-docs/docs/*.md | sed 's/.*\///' | sed 's/\.md$//'
 ~/.claude-code-docs/claude-docs-helper.sh --status
 ```
 
-Returns installation diagnostics: location, file counts, manifest stats, index status, and whether enhanced features (Python 3.9+) are available.
+Returns installation diagnostics: location, file counts, manifest stats, and whether enhanced features (Python 3.9+, used for path search) are available.
 
 ## Graceful Degradation
 
