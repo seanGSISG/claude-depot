@@ -53,7 +53,7 @@ Content search looks inside document text (titles, keywords, previews) to find r
 
 ## Path Search
 
-Path search uses fuzzy matching against the 573 documented paths. Best for finding specific documents by topic name.
+Path search uses fuzzy matching against all documented paths (~1,700). Best for finding specific documents by topic name.
 
 ```bash
 ~/.claude-code-docs/claude-docs-helper.sh --search "<query>"
