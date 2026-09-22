@@ -21,7 +21,7 @@ plugins/
 1. Create `plugins/<name>/.claude-plugin/plugin.json` matching the pattern in existing plugins.
 2. Create `plugins/<name>/skills/<name>/SKILL.md` with YAML frontmatter (`name`, `description`) and a markdown body.
 3. Add reference files under `references/` — use relative paths in SKILL.md (e.g., `references/foo.md`).
-4. Validate with: `python plugins/skill-creator-enhanced/scripts/quick_validate.py plugins/<name>/skills/<name>`
+4. Validate with: `python scripts/quick_validate.py plugins/<name>/skills/<name>`
 5. Add an entry to `.claude-plugin/marketplace.json` in the `plugins` array.
 6. Update `README.md` with the plugin description.
 
@@ -38,10 +38,10 @@ plugins/
 
 ```bash
 # Validate a skill (must pass before packaging)
-python plugins/skill-creator-enhanced/scripts/quick_validate.py plugins/<name>/skills/<name>
+python scripts/quick_validate.py plugins/<name>/skills/<name>
 
 # Package a skill into a .skill ZIP (for manual distribution)
-cd plugins/skill-creator-enhanced/scripts
+cd scripts
 python package_skill.py /path/to/skills/<name> /output/dir
 ```
 
@@ -119,5 +119,5 @@ Use conventional commit format: `feat:`, `fix:`, `docs:`, `chore:`. Descriptive 
 | `.claude-plugin/marketplace.json` | Plugin registry — must be updated when adding/removing plugins |
 | `.gitignore` | Excludes `*.skill`, `__pycache__/`, `*.pyc`, `*.pyo`, `.DS_Store`, `dist/` |
 | `scripts/bump-version.sh` | Version bump helper — updates plugin.json, commits, and creates git tag |
-| `plugins/skill-creator-enhanced/scripts/quick_validate.py` | Skill validator — checks frontmatter, name format, description length |
-| `plugins/skill-creator-enhanced/scripts/package_skill.py` | Skill packager — creates `.skill` ZIP archives |
+| `scripts/quick_validate.py` | Skill validator — checks frontmatter, name format, description length |
+| `scripts/package_skill.py` | Skill packager — creates `.skill` ZIP archives |

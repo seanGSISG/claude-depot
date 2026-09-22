@@ -28,7 +28,7 @@ jobs:
 
       - name: Validate all skills
         run: |
-          VALIDATE="plugins/skill-creator-enhanced/scripts/quick_validate.py"
+          VALIDATE="scripts/quick_validate.py"
           for skill_dir in plugins/*/skills/*/; do
             if [ ! -f "$skill_dir/SKILL.md" ]; then
               continue
@@ -45,7 +45,7 @@ jobs:
           mkdir -p dist
           # Only package skills from plugins that work standalone in Claude.ai.
           # Plugins with hooks/scripts are Claude Code-only — use /plugin install.
-          SKIP_PLUGINS="vault-tools plan-to-vault continual-learning"
+          SKIP_PLUGINS=""
           BUILT=0
 
           for skill_dir in plugins/*/skills/*/; do

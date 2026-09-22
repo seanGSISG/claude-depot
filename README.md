@@ -23,15 +23,11 @@ Download a `.skill` file from the table below, then upload via **Settings > Feat
 |---|---|---|
 | **trmm-expert** | Tactical RMM documentation expert | [trmm-expert.skill][trmm-expert] |
 | **claude-docs** | Anthropic docs search (Claude Code, API, Agent SDK) | [docs.skill][docs] |
-| **skill-creator-enhanced** | Skill creation guide with validators | [skill-creator-enhanced.skill][skill-creator] |
 | **rules-auditor** | Audit rules for staleness and quality | [rules-auditor.skill][rules-auditor] |
-| **obsidian** | Markdown, Bases, CLI, Web Clipper | [obsidian.skill][obsidian] |
 
 [trmm-expert]: https://github.com/seanGSISG/claude-depot/releases/download/latest/trmm-expert.skill
 [docs]: https://github.com/seanGSISG/claude-depot/releases/download/latest/docs.skill
-[skill-creator]: https://github.com/seanGSISG/claude-depot/releases/download/latest/skill-creator-enhanced.skill
 [rules-auditor]: https://github.com/seanGSISG/claude-depot/releases/download/latest/rules-auditor.skill
-[obsidian]: https://github.com/seanGSISG/claude-depot/releases/download/latest/obsidian.skill
 
 <details>
 <summary><strong>mcp-toolkit</strong> — MCP Apps & MCPB builder (6 skills)</summary>
@@ -54,8 +50,6 @@ These plugins use hooks and scripts that only work when installed via `/plugin i
 | Plugin | Description | Install |
 |---|---|---|
 | **cache-cleanup** | Prune old cached plugin versions | `/plugin install cache-cleanup@claude-depot` |
-| **continual-learning** | Cross-session memory via hooks | `/plugin install continual-learning@claude-depot` |
-| **vault-tools** | Obsidian vault toolkit (10 skills, plan archival, validation hooks) | `/plugin install vault-tools@claude-depot` |
 | **ultra-research** | Human-in-the-loop deep research pipeline (5 skills + web-search agent) | `/plugin install ultra-research@claude-depot` |
 | **pre-pr-review** | Pre-PR review of the current branch by a second model family, via the [deep-review](https://github.com/seanGSISG/deep-review) CLI | `/plugin install pre-pr-review@claude-depot` |
 
