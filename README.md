@@ -57,6 +57,7 @@ These plugins use hooks and scripts that only work when installed via `/plugin i
 | **continual-learning** | Cross-session memory via hooks | `/plugin install continual-learning@claude-depot` |
 | **vault-tools** | Obsidian vault toolkit (10 skills, plan archival, validation hooks) | `/plugin install vault-tools@claude-depot` |
 | **ultra-research** | Human-in-the-loop deep research pipeline (5 skills + web-search agent) | `/plugin install ultra-research@claude-depot` |
+| **pre-pr-review** | Pre-PR review of the current branch by a second model family, via the [deep-review](https://github.com/seanGSISG/deep-review) CLI | `/plugin install pre-pr-review@claude-depot` |
 
 ## Contributing
 

@@ -76,6 +76,13 @@
       "description": "Structured human-in-the-loop deep research pipeline — outline -> fan-out -> report",
       "category": "productivity",
       "tags": ["research", "deep-research", "ultra-research", "web-search", "outline", "report-generation"]
+    },
+    {
+      "name": "pre-pr-review",
+      "source": { "source": "url", "url": "https://github.com/seanGSISG/deep-review.git" },
+      "description": "Pre-PR review of the current branch by a Reviewer of a different model family, driven through the deep-review CLI with a Verifier pass before the push",
+      "category": "development",
+      "tags": ["code-review", "pre-pr", "second-opinion", "opencode", "pi", "glm"]
     }
   ]
 }
